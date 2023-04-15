@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AccountingSoftware.Models;
+using PagedList;
 
 namespace AccountingSoftware.Areas.Administrator.Controllers
 {
@@ -15,9 +16,15 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         private AccountingSoftwareDbContext db = new AccountingSoftwareDbContext();
 
         // GET: Administrator/NguoiDung
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
-            return View(db.NguoiDungs.ToList());
+            //return View(db.NguoiDungs.ToList());
+            var khachhangs = db.NguoiDungs.Select(kh => kh);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                khachhangs = khachhangs.Where(dm => dm.TenNguoiDung.Contains(searchString));
+            }
+            return View(khachhangs.OrderBy(dm => dm.MaNguoiDung).ToPagedList(page, pageSize));
         }
 
         // GET: Administrator/NguoiDung/Details/5
