@@ -1,0 +1,114 @@
+﻿@model AccountingSoftware.Models.NhanVien
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NhanVien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ChucVu.TenChucVu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChucVu.TenChucVu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhongBan.TenPhongBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhongBan.TenPhongBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiTinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QueQuan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QueQuan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HeSoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HeSoLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSoThue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaSoThue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoNguoiPhuThuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoNguoiPhuThuoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayVaoLam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayVaoLam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrinhDo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrinhDo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaNV }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
