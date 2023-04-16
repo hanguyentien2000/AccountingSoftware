@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AccountingSoftware.Models;
+using PagedList;
 
 namespace AccountingSoftware.Areas.Administrator.Controllers
 {
@@ -15,104 +16,82 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         private AccountingSoftwareDbContext db = new AccountingSoftwareDbContext();
 
         // GET: Administrator/PhongBan
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
-            return View(db.PhongBans.ToList());
+            //return View(db.NguoiDungs.ToList());
+            var phongbans = db.PhongBans.Select(kh => kh);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                phongbans = phongbans.Where(dm => dm.TenPhongBan.Contains(searchString));
+            }
+            return View(phongbans.OrderBy(dm => dm.MaPhongBan).ToPagedList(page, pageSize));
         }
 
         // GET: Administrator/PhongBan/Details/5
-        public ActionResult Details(int? id)
+        [HttpPost]
+        public JsonResult Index(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PhongBan phongBan = db.PhongBans.Find(id);
-            if (phongBan == null)
-            {
-                return HttpNotFound();
-            }
-            return View(phongBan);
+            PhongBan pb = db.PhongBans.Where(a => a.MaPhongBan.Equals(id)).FirstOrDefault();
+            return Json(pb, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Administrator/PhongBan/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Administrator/PhongBan/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaPhongBan,TenPhongBan,SDT")] PhongBan phongBan)
+        public JsonResult Create(PhongBan pb)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.PhongBans.Add(phongBan);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var existData = db.PhongBans.Where(x => x.TenPhongBan == pb.TenPhongBan).FirstOrDefault();
+                if (existData == null)
+                {
+                    db.PhongBans.Add(pb);
+                    db.SaveChanges();
+                    return Json(new { status = true, message = "Thêm thành công" });
+                }
+                else
+                    return Json(new { status = false, message = "Phòng ban này đã tồn tại" });
             }
-
-            return View(phongBan);
+            catch (Exception)
+            {
+                return Json(new { status = false, message = "Đã có lỗi xảy ra" });
+            }
         }
 
         // GET: Administrator/PhongBan/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PhongBan phongBan = db.PhongBans.Find(id);
-            if (phongBan == null)
-            {
-                return HttpNotFound();
-            }
-            return View(phongBan);
-        }
-
-        // POST: Administrator/PhongBan/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaPhongBan,TenPhongBan,SDT")] PhongBan phongBan)
+        public JsonResult Update(PhongBan pb)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(phongBan).State = EntityState.Modified;
+                PhongBan update = db.PhongBans.Where(a => a.MaPhongBan.Equals(pb.MaPhongBan)).FirstOrDefault();
+                update.TenPhongBan = pb.TenPhongBan;
+                update.SDT = pb.SDT;
+                db.Entry(update).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { status = true, message = "Sửa thông tin thành công" });
             }
-            return View(phongBan);
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return Json(new { status = false, message = "Đã có lỗi xảy ra" });
+            }
         }
 
         // GET: Administrator/PhongBan/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpPost]
+        public JsonResult Delete(int id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                PhongBan pb = db.PhongBans.Where(a => a.MaPhongBan.Equals(id)).FirstOrDefault();
+                db.PhongBans.Remove(pb);
+                db.SaveChanges();
+                return Json(new { status = true, message = "Xoá thành công" });
             }
-            PhongBan phongBan = db.PhongBans.Find(id);
-            if (phongBan == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return Json(new { status = false });
             }
-            return View(phongBan);
-        }
-
-        // POST: Administrator/PhongBan/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            PhongBan phongBan = db.PhongBans.Find(id);
-            db.PhongBans.Remove(phongBan);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

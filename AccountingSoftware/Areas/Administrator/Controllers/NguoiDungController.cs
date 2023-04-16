@@ -87,7 +87,7 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                 NguoiDung tk = db.NguoiDungs.Where(a => a.MaNguoiDung.Equals(id)).FirstOrDefault();
                 db.NguoiDungs.Remove(tk);
                 db.SaveChanges();
-                return Json(new { status = true });
+                return Json(new { status = true, message = "Xoá thành công" });
             }
             catch (Exception)
             {

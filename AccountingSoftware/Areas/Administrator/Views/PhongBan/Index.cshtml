@@ -1,39 +1,201 @@
-﻿@model IEnumerable<AccountingSoftware.Models.PhongBan>
-
+﻿@model PagedList.IPagedList<AccountingSoftware.Models.PhongBan>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý phòng ban";
 }
 
-<h2>Index</h2>
+@*<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenPhongBan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SDT)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenPhongBan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SDT)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenPhongBan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SDT)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaPhongBan }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaPhongBan }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaPhongBan })
-        </td>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenPhongBan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaPhongBan }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaPhongBan }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaPhongBan })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Quản lý phòng ban</h3>
+        </div>
+    </div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-8">
+                    @*<span class="glyphicon glyphicon-plus"></span>@Html.ActionLink("Thêm mới", "Create")*@
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">
+                        Thêm mới
+                    </button>
+                </div>
+                <div class="col-sm-4">
+                    <div id="datatable_filter" class="dataTables_filter">
+                        <form>
+                            <button type="submit" hidden>My Button</button>
+                            <input type="text" class="form-control" name="searchString" value="@ViewBag.searchString" id="searchString" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon2" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Tên Phòng Ban
+                        </th>
+                        <th>
+                            SĐT
+                        </th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.TenPhongBan)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SDT)</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadItem('@item.MaPhongBan')" data-target="#modalUpdate" style="background-color: forestgreen">
+                                    Cập nhật
+                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDelete" onclick="deleteItem('@item.MaPhongBan')" style="background-color: red">
+                                    Xoá
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <br />
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page,
+            currentFilter = ViewBag.CurrentFilter
+            }))
+        </div>
+    </div>
+</div>
+
+@section Popup{
+    <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">THÊM MỚI PHÒNG BAN</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="add-form" onsubmit="return themPhongBan()">
+                        <div class="form-group">
+                            <label for="NAME">Tên Phòng Ban</label>
+                            <input type="text" class="form-control" id="name" name="TenPhongBan" placeholder="Nhập tên phòng ban">
+                        </div>
+                        <div class="form-group">
+                            <label for="PHONE">SĐT</label>
+                            <input type="text" class="form-control" id="phone" name="SDT" placeholder="Nhập SĐT">
+                        </div>
+
+                        <p id="add-message"></p>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="themPhongBan()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
-</table>
+@section changePopup {
+    <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">CẬP NHẬT PHÒNG BAN</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="update-form" onsubmit="return capNhatPhongBan()">
+                        <input type="hidden" name="MaPhongBan" id="id1" />
+                        <div class="form-group">
+                            <label for="NAME">Tên phòng ban</label>
+                            <input type="text" class="form-control" id="name1" name="TenPhongBan" placeholder="Nhập tên phòng ban">
+                        </div>
+                        <div class="form-group">
+                            <label for="PHONE">SĐT</label>
+                            <input type="text" class="form-control" id="phone1" name="SDT" placeholder="Nhập SDT">
+                        </div>
+
+                        <p id="update-message"></p>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="capNhatPhongBan()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section deletePopup {
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 500px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">XOÁ PHÒNG BAN</h5>
+                </div>
+                <div class="modal-body">
+                    <h4 class="form-group mb-4 text-center fa-1x">
+                        Bạn đã chắc chắn chưa ?
+                    </h4>
+                    <div class="form-group mb-12" style="display: flex">
+                        <input type="hidden" value="" id="delete-id" />
+
+                        <div class="form-group mb-6" style="width:50%">
+                            <button type="button" class="btn btn-block btn-danger" onclick="xoaPhongBan()">Xoá</button>
+                        </div>
+                        <div class="form-group mb-6" style="width:50%">
+                            <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                        <p id="delete-message"></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Areas/Administrator/Assets/Phongban.js"></script>

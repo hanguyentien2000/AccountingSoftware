@@ -161,6 +161,8 @@
     <Compile Include="Session\LoginUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Administrator\Assets\ChucVu.js" />
+    <Content Include="Areas\Administrator\Assets\PhongBan.js" />
     <Content Include="Areas\Administrator\Assets\NguoiDung.js" />
     <Content Include="Areas\Administrator\Content\build\css\custom.css" />
     <Content Include="Areas\Administrator\Content\build\css\custom.min.css" />

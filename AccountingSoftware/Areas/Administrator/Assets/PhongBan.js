@@ -3,12 +3,11 @@ function loadItem(id) {
     $.ajax({
         type: 'POST',
         data: { "id": id },
-        url: '/NguoiDung/Index',
+        url: '/PhongBan/Index',
         success: function (response) {
-            $("#id1").val(response.MaNguoiDung);
-            $("#username1").val(response.TenNguoiDung);
-            $("#password1").val(response.MatKhau);
-            response.QuanTri ? $("#gioitinhb").prop("checked", true) : $("#gioitinhg").prop("checked", true);
+            $("#id1").val(response.MaPhongBan);
+            $("#name1").val(response.TenPhongBan);
+            $("#phone1").val(response.SDT);
         },
         error: function (response) {
             //debugger;  
@@ -19,7 +18,7 @@ function loadItem(id) {
 }
 
 //gửi ajax thêm mới
-function themNguoiDung() {
+function themPhongBan() {
     let data = {};
     let formData = $('#add-form').serializeArray({
     });
@@ -27,7 +26,7 @@ function themNguoiDung() {
         data["" + value.name + ""] = value.value;
     });
     $.ajax({
-        url: '/NguoiDung/Create',
+        url: '/PhongBan/Create',
         type: 'post',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -36,7 +35,7 @@ function themNguoiDung() {
             if (response.status == true) {
                 $("#add-message").addClass("text-warning");
                 setTimeout(function () {
-                    window.location.replace("/Administrator/NguoiDung/Index");
+                    window.location.replace("/Administrator/PhongBan/Index");
                 }, 1000)
             } else {
                 $("#add-message").addClass("text-danger");
@@ -51,7 +50,7 @@ function themNguoiDung() {
 }
 
 //gửi ajax sửa danh mục
-function capNhatNguoiDung() {
+function capNhatPhongBan() {
     let data = {};
     let formData = $('#update-form').serializeArray({
     });
@@ -59,7 +58,7 @@ function capNhatNguoiDung() {
         data["" + value.name + ""] = value.value;
     });
     $.ajax({
-        url: '/NguoiDung/Update',
+        url: '/PhongBan/Update',
         type: 'post',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -69,7 +68,7 @@ function capNhatNguoiDung() {
             if (response.status == true) {
                 $("#update-message").addClass("text-warning");
                 setTimeout(function () {
-                    window.location.replace("/Administrator/NguoiDung/Index");
+                    window.location.replace("/Administrator/PhongBan/Index");
                 }, 1000)
             } else {
                 $("#update-message").addClass("text-danger");
@@ -87,18 +86,18 @@ function deleteItem(id) {
     $("#delete-id").val(id);
 }
 
-function xoaNguoiDung() {
+function xoaPhongBan() {
     let id = $("#delete-id").val();
     $.ajax({
         type: 'POST',
         data: { "id": id },
-        url: '/NguoiDung/Delete',
+        url: '/PhongBan/Delete',
         success: function (response) {
             if (response.status == true) {
                 $("#row-" + id).remove();
                 $("#delete-message").addClass("text-warning");
                 setTimeout(function () {
-                    window.location.replace("/Administrator/NguoiDung/Index");
+                    window.location.replace("/Administrator/PhongBan/Index");
                 }, 1000)
             }
         },
