@@ -64,7 +64,7 @@
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
                             <h3>Danh mục quản trị hệ thống</h3>
-                            @if (tk.QuanTri == false)
+                            @if (tk.QuanTri == true)
                             {
                                 <ul class="nav side-menu">
                                     <li><a href="/Administrator/PhongBan/Index"><i class="fa fa-book"></i>Quản lý phòng ban</a></li>
@@ -73,7 +73,7 @@
                                     <li><a href="/Administrator/NguoiDung/Index"><i class="fa fa-universal-access"></i>Quản lý tài khoản</a></li>
                                 </ul>
                             }
-                            @if (tk.QuanTri == true)
+                            @if (tk.QuanTri == false)
                             {
                                 <ul class="nav side-menu">
                                     <li><a href="/Administrator/PhongBan/Index"><i class="fa fa-book"></i>Quản lý phòng ban</a></li>

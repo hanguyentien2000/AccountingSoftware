@@ -28,98 +28,71 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         }
 
         // GET: Administrator/NguoiDung/Details/5
-        public ActionResult Details(int? id)
+        [HttpPost]
+        public JsonResult Index(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            if (nguoiDung == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nguoiDung);
+            NguoiDung tk = db.NguoiDungs.Where(a => a.MaNguoiDung.Equals(id)).FirstOrDefault();
+            return Json(tk, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Administrator/NguoiDung/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Administrator/NguoiDung/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaNguoiDung,TenNguoiDung,MatKhau,QuanTri")] NguoiDung nguoiDung)
+        public JsonResult Create(NguoiDung tk)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.NguoiDungs.Add(nguoiDung);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var existData = db.NguoiDungs.Where(x => x.TenNguoiDung == tk.TenNguoiDung).FirstOrDefault();
+                if (existData == null)
+                {
+                    db.NguoiDungs.Add(tk);
+                    db.SaveChanges();
+                    return Json(new { status = true, message = "Thêm thành công" });
+                }
+                else
+                    return Json(new { status = false, message = "Người dùng này đã tồn tại tài khoản" });
             }
-
-            return View(nguoiDung);
+            catch (Exception)
+            {
+                return Json(new { status = false, message = "Đã có lỗi xảy ra" });
+            }
         }
 
         // GET: Administrator/NguoiDung/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            if (nguoiDung == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nguoiDung);
-        }
-
-        // POST: Administrator/NguoiDung/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaNguoiDung,TenNguoiDung,MatKhau,QuanTri")] NguoiDung nguoiDung)
+        public JsonResult Update(NguoiDung tk)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(nguoiDung).State = EntityState.Modified;
+                NguoiDung update = db.NguoiDungs.Where(a => a.MaNguoiDung.Equals(tk.MaNguoiDung)).FirstOrDefault();
+                update.TenNguoiDung = tk.TenNguoiDung;
+                update.MatKhau = tk.MatKhau;
+                update.QuanTri = tk.QuanTri;
+                db.Entry(update).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { status = true, message = "Sửa thông tin thành công" });
             }
-            return View(nguoiDung);
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return Json(new { status = false, message = "Đã có lỗi xảy ra" });
+            }
         }
 
         // GET: Administrator/NguoiDung/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpPost]
+        public JsonResult Delete(int id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                NguoiDung tk = db.NguoiDungs.Where(a => a.MaNguoiDung.Equals(id)).FirstOrDefault();
+                db.NguoiDungs.Remove(tk);
+                db.SaveChanges();
+                return Json(new { status = true });
             }
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            if (nguoiDung == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return Json(new { status = false });
             }
-            return View(nguoiDung);
-        }
-
-        // POST: Administrator/NguoiDung/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
-            db.NguoiDungs.Remove(nguoiDung);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

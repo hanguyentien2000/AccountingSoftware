@@ -96,12 +96,12 @@
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.TenNguoiDung)</td>
                             <td>@Html.DisplayFor(modelItem => item.MatKhau)</td>
-                            <td> @(item.QuanTri?"Quản trị viên":"Nhân viên")</td>
+                            <td> @(item.QuanTri? "Ban giám đốc" : "Nhân viên")</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadItem('@item.TenNguoiDung')" data-target="#modalUpdate" style="background-color: forestgreen">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadItem('@item.MaNguoiDung')" data-target="#modalUpdate" style="background-color: forestgreen">
                                     Cập nhật
                                 </button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDelete" onclick="deleteItem('@item.TenNguoiDung')" style="background-color: red">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDelete" onclick="deleteItem('@item.MaNguoiDung')" style="background-color: red">
                                     Xoá
                                 </button>
                             </td>
@@ -128,14 +128,14 @@
                     <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">THÊM MỚI TÀI KHOẢN</h5>
                 </div>
                 <div class="modal-body">
-                    <form id="add-form" onsubmit="return themTaiKhoan()">
+                    <form id="add-form" onsubmit="return themNguoiDung()">
                         <div class="form-group">
                             <label for="USERNAME">Username</label>
-                            <input type="text" class="form-control" id="username" name="USERNAME" placeholder="Nhập username">
+                            <input type="text" class="form-control" id="username" name="TenNguoiDung" placeholder="Nhập username">
                         </div>
                         <div class="form-group">
                             <label for="PASSWORD">Password</label>
-                            <input type="text" class="form-control" id="password" name="PASSWORD" placeholder="Nhập password">
+                            <input type="text" class="form-control" id="password" name="MatKhau" placeholder="Nhập password">
                         </div>
                         <div class="form-group">
                             <label for="QuanTri">Quản trị</label>
@@ -150,7 +150,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="themTaiKhoan()">Lưu</button>
+                    <button type="button" class="btn btn-primary" onclick="themNguoiDung()">Lưu</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
@@ -166,11 +166,15 @@
                     <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">CẬP NHẬT TÀI KHOẢN</h5>
                 </div>
                 <div class="modal-body">
-                    <form id="update-form" onsubmit="return capNhatTaiKhoan()">
-                        <input type="hidden" name="USERNAME" id="username1" />
+                    <form id="update-form" onsubmit="return capNhatNguoiDung()">
+                        <input type="hidden" name="MaNguoiDung" id="id1" />
+                        <div class="form-group">
+                            <label for="USERNAME">UserName</label>
+                            <input type="text" class="form-control" id="username1" name="TenNguoiDung" placeholder="Nhập username">
+                        </div>
                         <div class="form-group">
                             <label for="PASSWORD">Password</label>
-                            <input type="text" class="form-control" id="password1" name="PASSWORD" placeholder="Nhập password">
+                            <input type="text" class="form-control" id="password1" name="MatKhau" placeholder="Nhập password">
                         </div>
                         <div class="form-group">
                             <label for="QuanTri">Quản trị</label>
@@ -184,7 +188,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="capNhatTaiKhoan()">Lưu</button>
+                    <button type="button" class="btn btn-primary" onclick="capNhatNguoiDung()">Lưu</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
@@ -203,9 +207,9 @@
                     <h4 class="form-group mb-4 text-center fa-1x">
                         Bạn đã chắc chắn chưa ?
                     </h4>
-                    <input type="hidden" value="" id="delete-username" />
+                    <input type="hidden" value="" id="delete-id" />
 
-                    <button type="button" class="btn btn-block btn-danger" onclick="xoaTaiKhoan()">Xoá</button>
+                    <button type="button" class="btn btn-block btn-danger" onclick="xoaNguoiDung()">Xoá</button>
 
                     <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Đóng</button>
 

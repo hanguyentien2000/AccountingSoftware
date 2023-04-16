@@ -5,10 +5,10 @@ function loadItem(id) {
         data: { "id": id },
         url: '/NguoiDung/Index',
         success: function (response) {
-            $("#username1").val(response.USERNAME);
-            $("#password1").val(response.PASSWORD);
-            response.Quantri ? $("#gioitinhb").prop("checked", true) : $("#gioitinhg").prop("checked", true);
-            $("#manv1").val(response.MaNhanVien);
+            $("#id1").val(response.MaNguoiDung);
+            $("#username1").val(response.TenNguoiDung);
+            $("#password1").val(response.MatKhau);
+            response.QuanTri ? $("#gioitinhb").prop("checked", true) : $("#gioitinhg").prop("checked", true);
         },
         error: function (response) {
             //debugger;  
@@ -84,11 +84,11 @@ function capNhatNguoiDung() {
 
 //load data lên form xóa
 function deleteItem(id) {
-    $("#delete-username").val(id);
+    $("#delete-id").val(id);
 }
 
 function xoaNguoiDung() {
-    let id = $("#delete-username").val();
+    let id = $("#delete-id").val();
     $.ajax({
         type: 'POST',
         data: { "id": id },
