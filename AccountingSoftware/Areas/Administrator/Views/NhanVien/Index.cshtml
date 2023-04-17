@@ -1,99 +1,426 @@
-﻿@model IEnumerable<AccountingSoftware.Models.NhanVien>
+﻿@model PagedList.IPagedList<AccountingSoftware.Models.NhanVien>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Nhân viên";
 }
 
-<h2>Index</h2>
+@*<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ChucVu.TenChucVu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhongBan.TenPhongBan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoTen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgaySinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GioiTinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QueQuan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HeSoLuong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaSoThue)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoNguoiPhuThuoc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayVaoLam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TrinhDo)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenNguoiDung)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuanTri)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChucVu.TenChucVu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhongBan.TenPhongBan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoTen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgaySinh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GioiTinh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QueQuan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiaChi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HeSoLuong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaSoThue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoNguoiPhuThuoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayVaoLam)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrinhDo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaNV }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaNV }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaNV })
-        </td>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNguoiDung)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatKhau)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuanTri)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaNguoiDung }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaNguoiDung }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaNguoiDung })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Quản lý nhân viên</h3>
+        </div>
+    </div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-8">
+                    @*<span class="glyphicon glyphicon-plus"></span>@Html.ActionLink("Thêm mới", "Create")*@
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">
+                        Thêm mới
+                    </button>
+                </div>
+                <div class="col-sm-4">
+                    <div id="datatable_filter" class="dataTables_filter">
+                        <form>
+                            <button type="submit" hidden>My Button</button>
+                            <input type="text" class="form-control" name="searchString" value="@ViewBag.searchString" id="searchString" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon2" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Họ tên
+                        </th>
+                        <th>
+                            Giới tính
+                        </th>
+                        <th>
+                            Quê quán
+                        </th>
+                        <th>
+                            Ngày sinh
+                        </th>
+                        <th>
+                            Ngày vào làm
+                        </th>
+                        <th>
+                            Địa chỉ
+                        </th>
+                        <th>
+                            Hệ số lương
+                        </th>
+                        <th>
+                            Mã số thuế
+                        </th>
+                        <th>
+                            Số người phụ thuộc
+                        </th>
+                        <th>
+                            Trình độ
+                        </th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HoTen)
+                            </td>
+                            <td>
+                                @*  @(item.GioiTinh)*@
+                                @if (item.GioiTinh == true)
+                                {
+                                    <p>Nam</p>
+                                }
+
+                                @if (item.GioiTinh == false)
+                                {
+                                    <p>Nữ</p>
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.QueQuan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NgaySinh)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NgayVaoLam)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DiaChi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HeSoLuong)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaSoThue)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SoNguoiPhuThuoc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TrinhDo)
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadData(@item.MaNV)" data-target="#modalUpdate" style="background-color: forestgreen">
+                                    Cập nhật
+                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDelete" onclick="deleteData(@item.MaNV)" style="background-color: red">
+                                    Xoá
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <br />
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page,
+            currentFilter = ViewBag.CurrentFilter
+            }))
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+@section Popup{
+    <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">THÊM MỚI NHÂN VIÊN</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="add-form" onsubmit="return themNhanVien()">
+                        <div class="form-group">
+                            <label for="MaChucVu">Chức vụ</label>
+                            <br />
+                            <select class="form-select " id="macv" name="MaChucVu"
+                                    aria-label="category select example" required style="height: 30px; width: 440px;">
+                                @foreach (var item in ViewBag.chucvus)
+                                {
+                                    <option value="@item.MaChucVu">@item.TenChucVu</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="MaPhongBan">Phòng ban</label>
+                            <br />
+                            <select class="form-select " id="mapb" name="MaPhongBan"
+                                    aria-label="category select example" required style="height: 30px; width: 440px;">
+                                @foreach (var item in ViewBag.phongbans)
+                                {
+                                    <option value="@item.MaPhongBan">@item.TenPhongBan</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="TenNhanVien">Tên nhân viên</label>
+                            <input type="text" class="form-control" id="tenNhanVien" name="HoTen" placeholder="Nhập tên nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label for="DiaChi">Địa chỉ</label>
+                            <input type="text" class="form-control" id="diaChi" name="DiaChi" placeholder="Nhập địa chỉ">
+                        </div>
+                        <div class="form-group">
+                            <label for="QueQuan">Quê quán</label>
+                            <input type="text" class="form-control" id="queQuan" name="QueQuan" placeholder="Nhập quê quán">
+                        </div>
+                        <div class="form-group">
+                            <label for="GioiTinh">Giới tính</label>
+                            <br />
+                            <input class="form-check-input" type="radio" name="GioiTinh" id="gioiTinh1" value="true"> Nam
+                            &nbsp;
+                            <input class="form-check-input" type="radio" name="GioiTinh" id="gioiTinh2" value="false"> Nữ
+                        </div>
+                        <div class="form-group">
+                            <label for="NgaySinh">Ngày sinh</label>
+                            <div class="container">
+                                <div class="row">
+                                    <div class='col-sm-6'>
+                                        <div class="form-group">
+                                            <div class='input-group date'>
+                                                <input type='date' class="form-control" id="ngaySinh" name="NgaySinh" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="NgaySinh">Ngày vào làm</label>
+                            <div class="container">
+                                <div class="row">
+                                    <div class='col-sm-6'>
+                                        <div class="form-group">
+                                            <div class='input-group date'>
+                                                <input type='date' class="form-control" id="ngayVaoLam" name="NgayVaoLam" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="HeSoLuong">Hệ số lương</label>
+                            <input type="text" class="form-control" id="heSoLuong" name="HeSoLuong" placeholder="Nhập hệ số lương">
+                        </div>
+                        <div class="form-group">
+                            <label for="SNPT">Số người phụ thuộc</label>
+                            <input type="text" class="form-control" id="soNguoiPhuThuoc" name="SoNguoiPhuThuoc" placeholder="Nhập hệ số phụ thuộc">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="TrinhDo">Trình độ</label>
+                            <input type="text" class="form-control" id="trinhDo" name="TrinhDo" placeholder="Nhập hệ số phụ thuộc">
+                        </div>
+                        <div class="form-group">
+                            <label for="MaSoThue">Mã số thuế</label>
+                            <input type="text" class="form-control" id="mst" name="MaSoThue" placeholder="Nhập mã số thuế">
+                        </div>
+                        <p id="add-message"></p>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="themNhanVien()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
-</table>
+@section changePopup {
+    <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">CẬP NHẬT NHÂN VIÊN</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="update-form" onsubmit="return capNhatNhanVien()">
+                        <input type="hidden" name="MaNV" id="manv1" />
+                        <div class="form-group">
+                            <label for="MaChucVu">Chức vụ</label>
+                            <br />
+                            <select class="form-select " id="macv1" name="MaChucVu"
+                                    aria-label="category select example" required style="height: 30px; width: 440px;">
+                                @foreach (var item in ViewBag.chucvus)
+                                {
+                                    <option value="@item.MaChucVu">@item.TenChucVu</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="MaPhongBan">Phòng ban</label>
+                            <br />
+                            <select class="form-select " id="mapb1" name="MaPhongBan"
+                                    aria-label="category select example" required style="height: 30px; width: 440px;">
+                                @foreach (var item in ViewBag.phongbans)
+                                {
+                                    <option value="@item.MaPhongBan">@item.TenPhongBan</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="TenNhanVien">Tên nhân viên</label>
+                            <input type="text" class="form-control" id="tennv1" name="TenNhanVien" placeholder="Nhập tên nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label for="DiaChi">Địa chỉ</label>
+                            <input type="text" class="form-control" id="diaChi1" name="DiaChi" placeholder="Nhập địa chỉ">
+                        </div>
+                        <div class="form-group">
+                            <label for="QueQuan">Quê quán</label>
+                            <input type="text" class="form-control" id="queQuan1" name="QueQuan" placeholder="Nhập quê quán">
+                        </div>
+                        <div class="form-group">
+                            <label for="GioiTinh">Giới tính</label>
+                            <br />
+                            <input class="form-check-input" type="radio" name="GioiTinh" id="gioiTinhb" value="true"> Nam
+                            &nbsp;
+                            <input class="form-check-input" type="radio" name="GioiTinh" id="gioiTinhg" value="false"> Nữ
+                        </div>
+                        <div class="form-group">
+                            <label for="NgaySinh">Ngày sinh</label>
+                            <div class="container">
+                                <div class="row">
+                                    <div class='col-sm-6'>
+                                        <div class="form-group">
+                                            <div class='input-group date'>
+                                                <input type='date' class="form-control" id="ngaySinh1" name="NgaySinh" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="NgaySinh">Ngày vào làm</label>
+                            <div class="container">
+                                <div class="row">
+                                    <div class='col-sm-6'>
+                                        <div class="form-group">
+                                            <div class='input-group date'>
+                                                <input type='date' class="form-control" id="ngayVaoLam1" name="NgayVaoLam" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="HeSoLuong">Hệ số lương</label>
+                            <input type="text" class="form-control" id="hsl1" name="HeSoLuong" placeholder="Nhập hệ số lương">
+                        </div>
+                        <div class="form-group">
+                            <label for="SNPT">Số người phụ thuộc</label>
+                            <input type="text" class="form-control" id="snpt1" name="SoNguoiPhuThuoc" placeholder="Nhập hệ số phụ thuộc">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="TrinhDo">Trình độ</label>
+                            <input type="text" class="form-control" id="trinhDo1" name="TrinhDo" placeholder="Nhập trình độ">
+                        </div>
+                        <div class="form-group">
+                            <label for="MaSoThue">Mã số thuế</label>
+                            <input type="text" class="form-control" id="mst1" name="MaSoThue" placeholder="Nhập mã số thuế">
+                        </div>
+                        <p id="update-message"></p>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="capNhatNhanVien()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section deletePopup {
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 500px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">XOÁ TÀI KHOẢN</h5>
+                </div>
+                <div class="modal-body">
+                    <h4 class="form-group mb-4 text-center fa-1x">
+                        Bạn đã chắc chắn chưa ?
+                    </h4>
+                    <div class="form-group mb-12" style="display: flex">
+                        <input type="hidden" value="" id="delete-id" />
+
+                        <div class="form-group mb-6" style="width:50%">
+                            <button type="button" class="btn btn-block btn-danger" onclick="xoaNhanVien()">Xoá</button>
+                        </div>
+                        <div class="form-group mb-6" style="width:50%">
+                            <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                        <p id="delete-message"></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Areas/Administrator/Assets/NhanVien.js"></script>

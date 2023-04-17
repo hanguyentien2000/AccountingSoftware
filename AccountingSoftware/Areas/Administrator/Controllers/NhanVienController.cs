@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AccountingSoftware.Models;
+using PagedList;
 
 namespace AccountingSoftware.Areas.Administrator.Controllers
 {
@@ -15,113 +16,94 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         private AccountingSoftwareDbContext db = new AccountingSoftwareDbContext();
 
         // GET: Administrator/NhanVien
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
-            var nhanViens = db.NhanViens.Include(n => n.ChucVu).Include(n => n.PhongBan);
-            return View(nhanViens.ToList());
+            ViewBag.searchString = searchString;
+            ViewBag.chucvus = db.ChucVus.Select(d => d);
+            ViewBag.phongbans = db.PhongBans.Select(d => d);
+            var staffs = db.NhanViens.Select(kh => kh);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                staffs = staffs.Where(x => x.HoTen.Contains(searchString));
+            }
+            return View(staffs.OrderBy(x => x.MaNV).ToPagedList(page, pageSize));
         }
-
+       
         // GET: Administrator/NhanVien/Details/5
-        public ActionResult Details(int? id)
+        [HttpPost]
+        public JsonResult Index(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NhanVien nhanVien = db.NhanViens.Find(id);
-            if (nhanVien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhanVien);
+            NhanVien nv = db.NhanViens.Where(a => a.MaNV.Equals(id)).FirstOrDefault();
+            return Json(nv, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Administrator/NhanVien/Create
-        public ActionResult Create()
-        {
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu");
-            ViewBag.MaPhongBan = new SelectList(db.PhongBans, "MaPhongBan", "TenPhongBan");
-            return View();
-        }
-
-        // POST: Administrator/NhanVien/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaNV,MaPhongBan,MaChucVu,HoTen,NgaySinh,GioiTinh,QueQuan,DiaChi,HeSoLuong,MaSoThue,SoNguoiPhuThuoc,NgayVaoLam,TrinhDo")] NhanVien nhanVien)
+        public JsonResult Create(NhanVien nv)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.NhanViens.Add(nhanVien);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                NhanVien existData = db.NhanViens.FirstOrDefault(x => x.HoTen == nv.HoTen);
+                if (existData != null)
+                {
+                    return Json(new { status = false, message = "Đã tồn tại tên đăng nhập này" });
+                }
+                else
+                {
+                    db.NhanViens.Add(nv);
+                    db.SaveChanges();
+                    return Json(new { status = true, message = "Thêm thành công" });
+                }
             }
-
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", nhanVien.MaChucVu);
-            ViewBag.MaPhongBan = new SelectList(db.PhongBans, "MaPhongBan", "TenPhongBan", nhanVien.MaPhongBan);
-            return View(nhanVien);
+            catch (Exception)
+            {
+                return Json(new { status = false, message = "Đã có lỗi xảy ra" });
+            }
         }
 
         // GET: Administrator/NhanVien/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            NhanVien nhanVien = db.NhanViens.Find(id);
-            if (nhanVien == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", nhanVien.MaChucVu);
-            ViewBag.MaPhongBan = new SelectList(db.PhongBans, "MaPhongBan", "TenPhongBan", nhanVien.MaPhongBan);
-            return View(nhanVien);
-        }
-
-        // POST: Administrator/NhanVien/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaNV,MaPhongBan,MaChucVu,HoTen,NgaySinh,GioiTinh,QueQuan,DiaChi,HeSoLuong,MaSoThue,SoNguoiPhuThuoc,NgayVaoLam,TrinhDo")] NhanVien nhanVien)
+        public JsonResult Update(NhanVien nv)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(nhanVien).State = EntityState.Modified;
+                NhanVien update = db.NhanViens.Where(a => a.MaNV.Equals(nv.MaNV)).FirstOrDefault();
+                update.HoTen = nv.HoTen;
+                update.MaSoThue = nv.MaSoThue;
+                update.NgaySinh = nv.NgaySinh;
+                update.GioiTinh = nv.GioiTinh;
+                update.QueQuan = nv.QueQuan;
+                update.SoNguoiPhuThuoc = nv.SoNguoiPhuThuoc;
+                update.DiaChi = nv.DiaChi;
+                update.TrinhDo = nv.TrinhDo;
+                update.NgayVaoLam = nv.NgayVaoLam;
+                update.MaChucVu = nv.MaChucVu;
+                update.MaPhongBan = nv.MaPhongBan;
+                db.Entry(update).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { status = true, message = "Sửa thông tin thành công" });
             }
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", nhanVien.MaChucVu);
-            ViewBag.MaPhongBan = new SelectList(db.PhongBans, "MaPhongBan", "TenPhongBan", nhanVien.MaPhongBan);
-            return View(nhanVien);
+            catch (Exception)
+            {
+                return Json(new { status = false, message = "Đã có lỗi xảy ra" });
+            }
         }
 
         // GET: Administrator/NhanVien/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpPost]
+        public JsonResult Delete(int id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                NhanVien nv = db.NhanViens.Where(a => a.MaNV.Equals(id)).FirstOrDefault();
+                db.NhanViens.Remove(nv);
+                db.SaveChanges();
+                return Json(new { status = true });
             }
-            NhanVien nhanVien = db.NhanViens.Find(id);
-            if (nhanVien == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                return Json(new { status = false });
             }
-            return View(nhanVien);
-        }
-
-        // POST: Administrator/NhanVien/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            NhanVien nhanVien = db.NhanViens.Find(id);
-            db.NhanViens.Remove(nhanVien);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

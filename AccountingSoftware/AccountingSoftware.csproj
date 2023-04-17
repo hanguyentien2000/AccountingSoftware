@@ -136,6 +136,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
+    <Compile Include="Areas\Administrator\Controllers\BaseController.cs" />
     <Compile Include="Areas\Administrator\Controllers\AccountController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ChucVuController.cs" />
     <Compile Include="Areas\Administrator\Controllers\HomeController.cs" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Administrator\Assets\ChucVu.js" />
+    <Content Include="Areas\Administrator\Assets\NhanVien.js" />
     <Content Include="Areas\Administrator\Assets\PhongBan.js" />
     <Content Include="Areas\Administrator\Assets\NguoiDung.js" />
     <Content Include="Areas\Administrator\Content\build\css\custom.css" />

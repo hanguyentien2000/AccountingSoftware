@@ -24,10 +24,7 @@ namespace AccountingSoftware.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ChucVu>()
-                .HasMany(e => e.NhanViens)
-                .WithRequired(e => e.ChucVu)
-                .WillCascadeOnDelete(false);
+
 
             modelBuilder.Entity<NhanVien>()
                 .HasMany(e => e.BangChamCongs)
@@ -44,10 +41,7 @@ namespace AccountingSoftware.Models
                 .WithRequired(e => e.NhanVien)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<PhongBan>()
-                .HasMany(e => e.NhanViens)
-                .WithRequired(e => e.PhongBan)
-                .WillCascadeOnDelete(false);
+          
         }
     }
 }

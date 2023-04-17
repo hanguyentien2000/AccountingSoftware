@@ -31,8 +31,8 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         [HttpPost]
         public JsonResult Index(int id)
         {
-            ChucVu pb = db.ChucVus.Where(a => a.MaChucVu.Equals(id)).FirstOrDefault();
-            return Json(pb, JsonRequestBehavior.AllowGet);
+            ChucVu cv = db.ChucVus.Where(a => a.MaChucVu.Equals(id)).FirstOrDefault();
+            return Json(cv, JsonRequestBehavior.AllowGet);
         }
         // GET: Administrator/ChucVu/Create
         [HttpPost]

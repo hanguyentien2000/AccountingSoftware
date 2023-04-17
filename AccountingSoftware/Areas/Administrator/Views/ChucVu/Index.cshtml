@@ -85,7 +85,7 @@
                             <td>@Html.DisplayFor(modelItem => item.TenChucVu)</td>
                             <td>@Html.DisplayFor(modelItem => item.HeSoPhuCapCV)</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadItem('@item.MaChucVu')" data-target="#modalUpdate" style="background-color: forestgreen">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadData('@item.MaChucVu')" data-target="#modalUpdate" style="background-color: forestgreen">
                                     Cập nhật
                                 </button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDelete" onclick="deleteItem('@item.MaChucVu')" style="background-color: red">
@@ -117,11 +117,11 @@
                 <div class="modal-body">
                     <form id="add-form" onsubmit="return themChucVu()">
                         <div class="form-group">
-                            <label for="NAME">Tên chức vụ</label>
+                            <label for="TENCV">Tên chức vụ</label>
                             <input type="text" class="form-control" id="name" name="TenChucVu" placeholder="Nhập tên chức vụ">
                         </div>
                         <div class="form-group">
-                            <label for="PHONE">Hệ số phụ cấp công việc</label>
+                            <label for="HESO">Hệ số phụ cấp công việc</label>
                             <input type="text" class="form-control" id="hs" name="HeSoPhuCapCV" placeholder="Nhập hệ số">
                         </div>
 
@@ -149,11 +149,11 @@
                     <form id="update-form" onsubmit="return capNhatChucVu()">
                         <input type="hidden" name="MaChucVu" id="id1" />
                         <div class="form-group">
-                            <label for="NAME">Tên chức vụ</label>
+                            <label for="TENCV">Tên chức vụ</label>
                             <input type="text" class="form-control" id="name1" name="TenChucVu" placeholder="Nhập tên chức vụ">
                         </div>
                         <div class="form-group">
-                            <label for="HS">Hệ số phụ cấp công việc</label>
+                            <label for="HESO">Hệ số phụ cấp công việc</label>
                             <input type="text" class="form-control" id="hs1" name="HeSoPhuCapCV" placeholder="Nhập hệ số">
                         </div>
 

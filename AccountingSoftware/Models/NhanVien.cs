@@ -28,7 +28,10 @@ namespace AccountingSoftware.Models
         [StringLength(100)]
         public string HoTen { get; set; }
 
-        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString =
+         "{0:yyyy-MM-dd}",
+         ApplyFormatInEditMode = true)]
         public DateTime NgaySinh { get; set; }
 
         public bool? GioiTinh { get; set; }
@@ -53,7 +56,10 @@ namespace AccountingSoftware.Models
         [StringLength(100)]
         public string SoNguoiPhuThuoc { get; set; }
 
-        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString =
+         "{0:yyyy-MM-dd}",
+         ApplyFormatInEditMode = true)]
         public DateTime NgayVaoLam { get; set; }
 
         [Required]
@@ -62,10 +68,6 @@ namespace AccountingSoftware.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BangChamCong> BangChamCongs { get; set; }
-
-        public virtual ChucVu ChucVu { get; set; }
-
-        public virtual PhongBan PhongBan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TangGiamLuong> TangGiamLuongs { get; set; }

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AccountingSoftware.Areas.Administrator.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         // GET: Administrator/Home
         public ActionResult Index()

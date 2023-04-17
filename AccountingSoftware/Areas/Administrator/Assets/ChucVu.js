@@ -1,5 +1,5 @@
 ﻿//load dữ liệu lên form sửa
-function loadItem(id) {
+function loadData(id) {
     $.ajax({
         type: 'POST',
         data: { "id": id },
