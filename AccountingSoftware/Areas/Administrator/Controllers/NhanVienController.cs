@@ -79,6 +79,7 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                 update.NgayVaoLam = nv.NgayVaoLam;
                 update.MaChucVu = nv.MaChucVu;
                 update.MaPhongBan = nv.MaPhongBan;
+                update.MaSoThue = nv.MaSoThue;
                 db.Entry(update).State = EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { status = true, message = "Sửa thông tin thành công" });

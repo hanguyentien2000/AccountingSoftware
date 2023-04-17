@@ -6,46 +6,7 @@
     ViewBag.Title = "Nhân viên";
 }
 
-@*<h2>Index</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenNguoiDung)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MatKhau)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuanTri)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TenNguoiDung)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MatKhau)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuanTri)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaNguoiDung }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MaNguoiDung }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MaNguoiDung })
-                </td>
-            </tr>
-        }
-
-    </table>*@
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="page-title">
         <div class="title_left">
@@ -233,7 +194,7 @@
                                     <div class='col-sm-6'>
                                         <div class="form-group">
                                             <div class='input-group date'>
-                                                <input type='date' class="form-control" id="ngaySinh" name="NgaySinh" />
+                                                <input type='text' class="form-control" id="ngaySinh" name="NgaySinh" />
                                             </div>
                                         </div>
                                     </div>
@@ -247,7 +208,7 @@
                                     <div class='col-sm-6'>
                                         <div class="form-group">
                                             <div class='input-group date'>
-                                                <input type='date' class="form-control" id="ngayVaoLam" name="NgayVaoLam" />
+                                                <input type='text' class="form-control" id="ngayVaoLam" name="NgayVaoLam" />
                                             </div>
                                         </div>
                                     </div>
@@ -289,11 +250,11 @@
         <div class="modal-dialog" style="width: 900px">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">CẬP NHẬT NHÂN VIÊN</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">CẬP NHẬT TÀI KHOẢN</h5>
                 </div>
                 <div class="modal-body">
                     <form id="update-form" onsubmit="return capNhatNhanVien()">
-                        <input type="hidden" name="MaNV" id="manv1" />
+                        <input type="hidden" name="MaNV" id="id1" />
                         <div class="form-group">
                             <label for="MaChucVu">Chức vụ</label>
                             <br />
@@ -319,7 +280,7 @@
 
                         <div class="form-group">
                             <label for="TenNhanVien">Tên nhân viên</label>
-                            <input type="text" class="form-control" id="tennv1" name="TenNhanVien" placeholder="Nhập tên nhân viên">
+                            <input type="text" class="form-control" id="tennv1" name="HoTen" placeholder="Nhập tên nhân viên">
                         </div>
                         <div class="form-group">
                             <label for="DiaChi">Địa chỉ</label>
@@ -343,7 +304,7 @@
                                     <div class='col-sm-6'>
                                         <div class="form-group">
                                             <div class='input-group date'>
-                                                <input type='date' class="form-control" id="ngaySinh1" name="NgaySinh" />
+                                                <input type='text' class="form-control" id="ngaySinh1" name="NgaySinh" />
                                             </div>
                                         </div>
                                     </div>
@@ -357,7 +318,7 @@
                                     <div class='col-sm-6'>
                                         <div class="form-group">
                                             <div class='input-group date'>
-                                                <input type='date' class="form-control" id="ngayVaoLam1" name="NgayVaoLam" />
+                                                <input type='text' class="form-control" id="ngayVaoLam1" name="NgayVaoLam" />
                                             </div>
                                         </div>
                                     </div>

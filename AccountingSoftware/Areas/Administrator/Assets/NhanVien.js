@@ -16,20 +16,22 @@ function loadData(id) {
             var date = new Date(parseInt(a));
             var date2 = new Date(parseInt(b));
             const hours = date.getHours().toString().padStart(2, '0'); // get hours and pad with leading zero if necessary
-            const minutes = date.getMinutes().toString().padStart(2, '0'); /
+            const minutes = date.getMinutes().toString().padStart(2, '0'); 
             const day = date.getDate().toString().padStart(2, '0'); // get day and pad with 0 if necessary
             const month = (date.getMonth() + 1).toString().padStart(2, '0'); // get month and pad with 0 if necessary
             const year = date.getFullYear().toString(); // get year
-            const dateString = `${day}/${month}/${year}`; // concatenate day, month, and year with '/' separator
+            const dateString = `${month}/${day}/${year}`; // concatenate the strings to form the final date string
             console.log(dateString); // o
 
+            const hours2 = date.getHours().toString().padStart(2, '0'); // get hours and pad with leading zero if necessary
+            const minutes2 = date.getMinutes().toString().padStart(2, '0');
             const day2 = date2.getDate().toString().padStart(2, '0'); // get day and pad with 0 if necessary
             const month2 = (date2.getMonth() + 1).toString().padStart(2, '0'); // get month and pad with 0 if necessary
             const year2 = date2.getFullYear().toString(); // get year
             const dateString2 = `${day2}/${month2}/${year2}`; // concatenate day, month, and year with '/' separator
             console.log(dateString2); // o
 
-            $("#manv1").val(response.MaNhanVien);
+            $("#id1").val(response.MaNV);
             $("#macv1").val(response.MaChucVu);
             $("#mapb1").val(response.MaPhongBan);
             $("#tennv1").val(response.HoTen);
