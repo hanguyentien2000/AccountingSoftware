@@ -9,12 +9,6 @@ namespace AccountingSoftware.Models
     [Table("PhongBan")]
     public partial class PhongBan
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PhongBan()
-        {
-            NhanViens = new HashSet<NhanVien>();
-        }
-
         [Key]
         public int MaPhongBan { get; set; }
 
@@ -25,8 +19,5 @@ namespace AccountingSoftware.Models
         [Required]
         [StringLength(100)]
         public string SDT { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NhanVien> NhanViens { get; set; }
     }
 }

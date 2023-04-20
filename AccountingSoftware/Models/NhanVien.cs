@@ -15,6 +15,7 @@ namespace AccountingSoftware.Models
             BangChamCongs = new HashSet<BangChamCong>();
             TangGiamLuongs = new HashSet<TangGiamLuong>();
             ThamSoTinhLuongs = new HashSet<ThamSoTinhLuong>();
+            ThueTNCNs = new HashSet<ThueTNCN>();
         }
 
         [Key]
@@ -30,8 +31,8 @@ namespace AccountingSoftware.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString =
-         "{0:yyyy-MM-dd}",
-         ApplyFormatInEditMode = true)]
+          "{0:yyyy-MM-dd}",
+          ApplyFormatInEditMode = true)]
         public DateTime NgaySinh { get; set; }
 
         public bool? GioiTinh { get; set; }
@@ -58,13 +59,17 @@ namespace AccountingSoftware.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString =
-         "{0:yyyy-MM-dd}",
-         ApplyFormatInEditMode = true)]
+          "{0:yyyy-MM-dd}",
+          ApplyFormatInEditMode = true)]
         public DateTime NgayVaoLam { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string TrinhDo { get; set; }
+        public string LuongThoaThuan { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string LuongCoBan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BangChamCong> BangChamCongs { get; set; }
@@ -74,5 +79,8 @@ namespace AccountingSoftware.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThamSoTinhLuong> ThamSoTinhLuongs { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThueTNCN> ThueTNCNs { get; set; }
     }
 }

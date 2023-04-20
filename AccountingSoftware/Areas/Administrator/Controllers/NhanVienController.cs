@@ -75,7 +75,8 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                 update.QueQuan = nv.QueQuan;
                 update.SoNguoiPhuThuoc = nv.SoNguoiPhuThuoc;
                 update.DiaChi = nv.DiaChi;
-                update.TrinhDo = nv.TrinhDo;
+                update.LuongCoBan = nv.LuongCoBan;
+                update.LuongThoaThuan = nv.LuongThoaThuan;
                 update.NgayVaoLam = nv.NgayVaoLam;
                 update.MaChucVu = nv.MaChucVu;
                 update.MaPhongBan = nv.MaPhongBan;

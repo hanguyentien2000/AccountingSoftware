@@ -10,7 +10,11 @@ namespace AccountingSoftware.Models
     public partial class ThueTNCN
     {
         [Key]
+        public int MaThueTNCN { get; set; }
+
         public int BacThue { get; set; }
+
+        public int MaNV { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -23,5 +27,7 @@ namespace AccountingSoftware.Models
         [Required]
         [StringLength(100)]
         public string ThueSuat { get; set; }
+
+        public virtual NhanVien NhanVien { get; set; }
     }
 }

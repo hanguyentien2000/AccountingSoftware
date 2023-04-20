@@ -96,7 +96,7 @@
                             <td>@Html.DisplayFor(modelItem => item.MatKhau)</td>
                             <td> @(item.QuanTri? "Ban giám đốc" : "Nhân viên")</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadItem('@item.MaNguoiDung')" data-target="#modalUpdate" style="background-color: forestgreen">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadData('@item.MaNguoiDung')" data-target="#modalUpdate" style="background-color: forestgreen">
                                     Cập nhật
                                 </button>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDelete" onclick="deleteItem('@item.MaNguoiDung')" style="background-color: red">

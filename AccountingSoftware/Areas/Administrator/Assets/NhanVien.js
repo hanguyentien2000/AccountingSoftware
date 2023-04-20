@@ -20,7 +20,7 @@ function loadData(id) {
             const day = date.getDate().toString().padStart(2, '0'); // get day and pad with 0 if necessary
             const month = (date.getMonth() + 1).toString().padStart(2, '0'); // get month and pad with 0 if necessary
             const year = date.getFullYear().toString(); // get year
-            const dateString = `${month}/${day}/${year}`; // concatenate the strings to form the final date string
+            const dateString = `${day}/${month}/${year}`; // concatenate the strings to form the final date string
             console.log(dateString); // o
 
             const hours2 = date.getHours().toString().padStart(2, '0'); // get hours and pad with leading zero if necessary
@@ -37,7 +37,8 @@ function loadData(id) {
             $("#tennv1").val(response.HoTen);
             $("#diaChi1").val(response.DiaChi);
             $("#queQuan1").val(response.QueQuan);
-            $("#trinhDo1").val(response.TrinhDo);
+            $("#lcb1").val(response.LuongCoBan);
+            $("#ltt1").val(response.LuongThoaThuan);
             $("#hsl1").val(response.HeSoLuong);
             $("#mst1").val(response.MaSoThue);
             $("#snpt1").val(response.SoNguoiPhuThuoc);

@@ -64,7 +64,10 @@
                             Số người phụ thuộc
                         </th>
                         <th>
-                            Trình độ
+                            Lương thoả thuận
+                        </th>
+                        <th>
+                            Lương cơ bản
                         </th>
                         <th>Thao tác</th>
                     </tr>
@@ -110,7 +113,10 @@
                                 @Html.DisplayFor(modelItem => item.SoNguoiPhuThuoc)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.TrinhDo)
+                                @Html.DisplayFor(modelItem => item.LuongThoaThuan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LuongCoBan)
                             </td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadData(@item.MaNV)" data-target="#modalUpdate" style="background-color: forestgreen">
@@ -225,9 +231,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="TrinhDo">Trình độ</label>
-                            <input type="text" class="form-control" id="trinhDo" name="TrinhDo" placeholder="Nhập hệ số phụ thuộc">
+                            <label for="LuongCoBan">Lương cơ bản</label>
+                            <input type="text" class="form-control" id="lcb" name="LuongCoBan" placeholder="Nhập lương cơ bản">
                         </div>
+
+                        <div class="form-group">
+                            <label for="LuongThoaThuan">Lương thoả thuận</label>
+                            <input type="text" class="form-control" id="ltt" name="LuongThoaThuan" placeholder="Nhập lương thoả thuận">
+                        </div>
+
+
+
                         <div class="form-group">
                             <label for="MaSoThue">Mã số thuế</label>
                             <input type="text" class="form-control" id="mst" name="MaSoThue" placeholder="Nhập mã số thuế">
@@ -335,9 +349,15 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="TrinhDo">Trình độ</label>
-                            <input type="text" class="form-control" id="trinhDo1" name="TrinhDo" placeholder="Nhập trình độ">
+                            <label for="LuongCoBan">Lương cơ bản</label>
+                            <input type="text" class="form-control" id="lcb1" name="LuongCoBan" placeholder="Nhập lương cơ bản">
                         </div>
+
+                        <div class="form-group">
+                            <label for="LuongThoaThuan">Lương thoả thuận</label>
+                            <input type="text" class="form-control" id="ltt1" name="LuongThoaThuan" placeholder="Nhập lương thoả thuận">
+                        </div>
+
                         <div class="form-group">
                             <label for="MaSoThue">Mã số thuế</label>
                             <input type="text" class="form-control" id="mst1" name="MaSoThue" placeholder="Nhập mã số thuế">

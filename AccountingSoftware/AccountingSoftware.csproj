@@ -153,6 +153,7 @@
     <Compile Include="Models\NguoiDung.cs" />
     <Compile Include="Models\NhanVien.cs" />
     <Compile Include="Models\PhongBan.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\TangGiamLuong.cs" />
     <Compile Include="Models\ThamSoTinhLuong.cs" />
     <Compile Include="Models\ThueTNCN.cs" />

@@ -9,12 +9,6 @@ namespace AccountingSoftware.Models
     [Table("ChucVu")]
     public partial class ChucVu
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ChucVu()
-        {
-            NhanViens = new HashSet<NhanVien>();
-        }
-
         [Key]
         public int MaChucVu { get; set; }
 
@@ -25,8 +19,5 @@ namespace AccountingSoftware.Models
         [Required]
         [StringLength(100)]
         public string HeSoPhuCapCV { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NhanVien> NhanViens { get; set; }
     }
 }
