@@ -143,6 +143,7 @@
     <Compile Include="Areas\Administrator\Controllers\NguoiDungController.cs" />
     <Compile Include="Areas\Administrator\Controllers\NhanVienController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PhongBanController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ThueTNCNController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -164,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Administrator\Assets\ChucVu.js" />
+    <Content Include="Areas\Administrator\Assets\ThueTNCN.js" />
     <Content Include="Areas\Administrator\Assets\NhanVien.js" />
     <Content Include="Areas\Administrator\Assets\PhongBan.js" />
     <Content Include="Areas\Administrator\Assets\NguoiDung.js" />
@@ -4605,6 +4607,11 @@
     <Content Include="Areas\Administrator\Views\NguoiDung\Details.cshtml" />
     <Content Include="Areas\Administrator\Views\NguoiDung\Edit.cshtml" />
     <Content Include="Areas\Administrator\Views\NguoiDung\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThueTNCN\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThueTNCN\Delete.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThueTNCN\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThueTNCN\Edit.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThueTNCN\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
