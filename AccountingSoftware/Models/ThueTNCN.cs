@@ -28,6 +28,5 @@ namespace AccountingSoftware.Models
         [StringLength(100)]
         public string ThueSuat { get; set; }
 
-        public virtual NhanVien NhanVien { get; set; }
     }
 }

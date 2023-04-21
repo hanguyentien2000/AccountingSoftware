@@ -1,58 +1,224 @@
-﻿@model IEnumerable<AccountingSoftware.Models.ThueTNCN>
-
+﻿@model PagedList.IPagedList<AccountingSoftware.Models.ThueTNCN>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Thuế TNCN";
 }
 
-@*<h2>Index</h2>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Quản lý thuế TNCN</h3>
+        </div>
+    </div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-8">
+                    @*<span class="glyphicon glyphicon-plus"></span>@Html.ActionLink("Thêm mới", "Create")*@
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">
+                        Thêm mới
+                    </button>
+                </div>
+                <div class="col-sm-4">
+                    <div id="datatable_filter" class="dataTables_filter">
+                        <form>
+                            <button type="submit" hidden>My Button</button>
+                            <input type="text" class="form-control" name="searchString" value="@ViewBag.searchString" id="searchString" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon2" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @*<th>
+                            Họ tên
+                        </th>*@
+                        <th>
+                            Bậc thuế
+                        </th>
+                        <th>
+                            Từ
+                        </th>
+                        <th>
+                            Đến
+                        </th>
+                        <th>
+                            Thuế suất
+                        </th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            @*<td>
+                                @foreach (var item1 in ViewBag.nhanviens)
+                                {
+                                    if (item1.MaNV == item.MaNV)
+                                    {
+=                                        <p>@Html.DisplayFor(modelItem => item.MaNV)</p>
+                                    }
+                                }
+                            </td>*@
+                            @*<td>@Html.DisplayFor(modelItem => item.MaNV)</td>*@
+                            <td>@Html.DisplayFor(modelItem => item.BacThue)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Tu)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Den)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ThueSuat)</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadData('@item.MaThueTNCN')" data-target="#modalUpdate" style="background-color: forestgreen">
+                                    Cập nhật
+                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDelete" onclick="deleteItem('@item.MaThueTNCN')" style="background-color: red">
+                                    Xoá
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <br />
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page,
+            currentFilter = ViewBag.CurrentFilter
+            }))
+        </div>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NhanVien.HoTen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BacThue)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Den)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThueSuat)
-        </th>
-        <th></th>
-    </tr>
+@section Popup{
+    <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">THÊM MỚI CHỨC VỤ</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="add-form" onsubmit="return themThueTNCN()">
+                        <div class="form-group">
+                            <label for="MaNhanVien">Mã nhân viên</label>
+                            <br />
+                            <select class="form-select " id="manv" name="MaNV"
+                                    aria-label="category select example" required style="height: 30px; width: 440px;">
+                                @foreach (var item in ViewBag.nhanviens)
+                                {
+                                    <option value="@item.MaNV">@item.HoTen</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="BACTHUE">Bậc thuế</label>
+                            <input type="text" class="form-control" id="bt" name="BacThue" placeholder="Nhập bậc thuế">
+                        </div>
+                        <div class="form-group">
+                            <label for="FROM">Từ</label>
+                            <input type="text" class="form-control" id="t" name="Tu" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="TO">Đến</label>
+                            <input type="text" class="form-control" id="d" name="Den" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="TS">Thuế suất</label>
+                            <input type="text" class="form-control" id="ts" name="ThueSuat" placeholder="">
+                        </div>
+                        <p id="add-message"></p>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NhanVien.HoTen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BacThue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Den)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThueSuat)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MaThueTNCN }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MaThueTNCN }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MaThueTNCN })
-            </td>
-        </tr>
-    }
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="themThueTNCN()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
-</table>*@
+@section changePopup {
+    <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">CẬP NHẬT CHỨC VỤ</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="update-form" onsubmit="return capNhatThueTNCN()">
+                        <input type="hidden" name="MaThueTNCN" id="id1" />
+                        <div class="form-group">
+                            <label for="MaNhanVien">Mã nhân viên</label>
+                            <br />
+                            <select class="form-select " id="manv1" name="MaNV"
+                                    aria-label="category select example" required style="height: 30px; width: 440px;">
+                                @foreach (var item in ViewBag.nhanviens)
+                                {
+                                    <option value="@item.MaNV">@item.HoTen</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="BACTHUE">Bậc thuế</label>
+                            <input type="text" class="form-control" id="bt1" name="BacThue" placeholder="Nhập bậc thuế">
+                        </div>
+                        <div class="form-group">
+                            <label for="FROM">Từ</label>
+                            <input type="text" class="form-control" id="t1" name="Tu" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="TO">Đến</label>
+                            <input type="text" class="form-control" id="d1" name="Den" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="TS">Thuế suất</label>
+                            <input type="text" class="form-control" id="ts1" name="ThueSuat" placeholder="">
+                        </div>
+                        <p id="update-message"></p>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="capNhatThueTNCN()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section deletePopup {
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 500px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">XOÁ CHỨC VỤ</h5>
+                </div>
+                <div class="modal-body">
+                    <h4 class="form-group mb-4 text-center fa-1x">
+                        Bạn đã chắc chắn chưa ?
+                    </h4>
+                    <div class="form-group mb-12" style="display: flex">
+                        <input type="hidden" value="" id="delete-id" />
+
+                        <div class="form-group mb-6" style="width:50%">
+                            <button type="button" class="btn btn-block btn-danger" onclick="xoaThueTNCN()">Xoá</button>
+                        </div>
+                        <div class="form-group mb-6" style="width:50%">
+                            <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                        <p id="delete-message"></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Areas/Administrator/Assets/ThueTNCN.js"></script>

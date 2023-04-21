@@ -18,10 +18,23 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         // GET: Administrator/ThueTNCN
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
-            var thueTNCNs = db.ThueTNCNs.Include(t => t.NhanVien);
+            ViewBag.nhanviens = db.NhanViens.Select(d => d);
+
+            var thueTNCNs = db.ThueTNCNs.Select(kh => kh);
+            //foreach (var item in db.NhanViens)
+            //{
+            //    foreach (var item1 in thueTNCNs)
+            //    {
+            //        if (item.MaNV == item1.MaNV)
+            //        {
+            //            item1.MaNV = item1.MaNV.ToString();
+            //            item1.MaNV = item.HoTen;
+            //        }
+            //    }
+            //}
             if (!String.IsNullOrEmpty(searchString))
             {
-                thueTNCNs = thueTNCNs.Where(dm => dm.NhanVien.HoTen.Contains(searchString));
+                thueTNCNs = thueTNCNs.Where(dm => dm.Tu.Contains(searchString));
             }
             return View(thueTNCNs.OrderBy(dm => dm.MaThueTNCN).ToPagedList(page, pageSize));
         }
@@ -40,7 +53,7 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         {
             try
             {
-                var existData = db.ThueTNCNs.Where(x => x.NhanVien.MaNV == tk.NhanVien.MaNV).FirstOrDefault();
+                var existData = db.ThueTNCNs.Where(x => x.MaNV == tk.MaNV).FirstOrDefault();
                 if (existData == null)
                 {
                     db.ThueTNCNs.Add(tk);
@@ -48,7 +61,7 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                     return Json(new { status = true, message = "Thêm thành công" });
                 }
                 else
-                    return Json(new { status = false, message = "Người dùng này đã tồn tại tài khoản" });
+                    return Json(new { status = false, message = "Nhân viên này đã có thông tin thuế TNCN" });
             }
             catch (Exception)
             {
@@ -67,6 +80,7 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                 update.Den = tk.Den;
                 update.BacThue = tk.BacThue;
                 update.MaNV = tk.MaNV;
+                update.ThueSuat = tk.ThueSuat;
                 db.Entry(update).State = EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { status = true, message = "Sửa thông tin thành công" });

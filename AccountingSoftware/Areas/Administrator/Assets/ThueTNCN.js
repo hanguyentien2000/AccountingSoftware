@@ -10,6 +10,7 @@ function loadData(id) {
             $("#bt1").val(response.BacThue);
             $("#t1").val(response.Tu);
             $("#d1").val(response.Den);
+            $("#ts1").val(response.ThueSuat);
         },
         error: function (response) {
             //debugger;  
