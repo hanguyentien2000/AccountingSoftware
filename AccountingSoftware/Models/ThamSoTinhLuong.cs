@@ -12,27 +12,17 @@ namespace AccountingSoftware.Models
         [Key]
         public int MaThamSo { get; set; }
 
-        public int MaNV { get; set; }
-
         [Required]
         [StringLength(100)]
         public string ThangNam { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string LuongCB { get; set; }
+        public string CongLuong { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string NgcChuan { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string SoGioChuan { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string XepLoai { get; set; }
+        public string GioCongNgay { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -45,7 +35,6 @@ namespace AccountingSoftware.Models
         [Required]
         [StringLength(100)]
         public string PcAn { get; set; }
-
         [Required]
         [StringLength(100)]
         public string TLBHXH { get; set; }
@@ -62,6 +51,12 @@ namespace AccountingSoftware.Models
         [StringLength(100)]
         public string TLKPCD { get; set; }
 
-        public virtual NhanVien NhanVien { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string GiamTruBanThan { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string GiamTruNPT { get; set; }
     }
 }

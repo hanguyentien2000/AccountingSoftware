@@ -34,9 +34,6 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        @*<th>
-                            Họ tên
-                        </th>*@
                         <th>
                             Bậc thuế
                         </th>
@@ -56,16 +53,6 @@
                 {
                     <tbody>
                         <tr>
-                            @*<td>
-                                @foreach (var item1 in ViewBag.nhanviens)
-                                {
-                                    if (item1.MaNV == item.MaNV)
-                                    {
-=                                        <p>@Html.DisplayFor(modelItem => item.MaNV)</p>
-                                    }
-                                }
-                            </td>*@
-                            @*<td>@Html.DisplayFor(modelItem => item.MaNV)</td>*@
                             <td>@Html.DisplayFor(modelItem => item.BacThue)</td>
                             <td>@Html.DisplayFor(modelItem => item.Tu)</td>
                             <td>@Html.DisplayFor(modelItem => item.Den)</td>
@@ -98,21 +85,10 @@
         <div class="modal-dialog" style="width: 900px">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">THÊM MỚI CHỨC VỤ</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">THÊM MỚI THUẾ TNCN</h5>
                 </div>
                 <div class="modal-body">
                     <form id="add-form" onsubmit="return themThueTNCN()">
-                        <div class="form-group">
-                            <label for="MaNhanVien">Mã nhân viên</label>
-                            <br />
-                            <select class="form-select " id="manv" name="MaNV"
-                                    aria-label="category select example" required style="height: 30px; width: 440px;">
-                                @foreach (var item in ViewBag.nhanviens)
-                                {
-                                    <option value="@item.MaNV">@item.HoTen</option>
-                                }
-                            </select>
-                        </div>
                         <div class="form-group">
                             <label for="BACTHUE">Bậc thuế</label>
                             <input type="text" class="form-control" id="bt" name="BacThue" placeholder="Nhập bậc thuế">
@@ -147,22 +123,11 @@
         <div class="modal-dialog" style="width: 900px">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">CẬP NHẬT CHỨC VỤ</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">CẬP NHẬT THUẾ TNCN</h5>
                 </div>
                 <div class="modal-body">
                     <form id="update-form" onsubmit="return capNhatThueTNCN()">
                         <input type="hidden" name="MaThueTNCN" id="id1" />
-                        <div class="form-group">
-                            <label for="MaNhanVien">Mã nhân viên</label>
-                            <br />
-                            <select class="form-select " id="manv1" name="MaNV"
-                                    aria-label="category select example" required style="height: 30px; width: 440px;">
-                                @foreach (var item in ViewBag.nhanviens)
-                                {
-                                    <option value="@item.MaNV">@item.HoTen</option>
-                                }
-                            </select>
-                        </div>
                         <div class="form-group">
                             <label for="BACTHUE">Bậc thuế</label>
                             <input type="text" class="form-control" id="bt1" name="BacThue" placeholder="Nhập bậc thuế">

@@ -14,41 +14,25 @@ namespace AccountingSoftware.Models
 
         public int MaNV { get; set; }
 
-        public int NgayCongDiLam { get; set; }
-
-        public int GioCongTrongNgay { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string SoNgayLVNgayThuong { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string HeSoNgayThuong { get; set; }
+        public string SoNgayLVNgayLe { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string HeSoNgayLe { get; set; }
+        public string SoNgayLVNgayNghiPhep { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string ThuLaoBHXH { get; set; }
+        public string SoNgayNghiKhongLuong { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string ThuLaoBHYT { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string ThuLaoBHTN { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string ThuLaoKPCD { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string GiamTruBanThan { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string GiamTruNPT { get; set; }
+        public string DGHQCN { get; set; }
 
         public virtual NhanVien NhanVien { get; set; }
     }

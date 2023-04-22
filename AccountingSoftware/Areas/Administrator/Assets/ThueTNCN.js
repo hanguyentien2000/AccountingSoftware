@@ -6,7 +6,6 @@ function loadData(id) {
         url: '/ThueTNCN/Index',
         success: function (response) {
             $("#id1").val(response.MaThueTNCN);
-            $("#manv1").val(response.MaNV);
             $("#bt1").val(response.BacThue);
             $("#t1").val(response.Tu);
             $("#d1").val(response.Den);

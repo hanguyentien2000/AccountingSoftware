@@ -14,8 +14,6 @@ namespace AccountingSoftware.Models
 
         public int BacThue { get; set; }
 
-        public int MaNV { get; set; }
-
         [Required]
         [StringLength(100)]
         public string Tu { get; set; }
@@ -27,6 +25,5 @@ namespace AccountingSoftware.Models
         [Required]
         [StringLength(100)]
         public string ThueSuat { get; set; }
-
     }
 }

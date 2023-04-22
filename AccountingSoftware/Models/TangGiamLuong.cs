@@ -32,7 +32,7 @@ namespace AccountingSoftware.Models
 
         [Required]
         [StringLength(100)]
-        public string DienGia { get; set; }
+        public string ThongTin { get; set; }
 
         public virtual NhanVien NhanVien { get; set; }
     }
