@@ -144,6 +144,8 @@
     <Compile Include="Areas\Administrator\Controllers\NguoiDungController.cs" />
     <Compile Include="Areas\Administrator\Controllers\NhanVienController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PhongBanController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\BaoCaoBHXH.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ThamSoTinhLuongController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ThueTNCNController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -4619,6 +4621,11 @@
     <Content Include="Areas\Administrator\Views\BangChamCong\Details.cshtml" />
     <Content Include="Areas\Administrator\Views\BangChamCong\Edit.cshtml" />
     <Content Include="Areas\Administrator\Views\BangChamCong\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThamSoTinhLuong\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThamSoTinhLuong\Delete.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThamSoTinhLuong\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThamSoTinhLuong\Edit.cshtml" />
+    <Content Include="Areas\Administrator\Views\ThamSoTinhLuong\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

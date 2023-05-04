@@ -1,0 +1,99 @@
+﻿@model IEnumerable<AccountingSoftware.Models.ThamSoTinhLuong>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ThangNam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CongLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GioCongNgay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HsNgayThuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HsNgayLe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PcAn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TLBHXH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TLBHYT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TLBHTN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TLKPCD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiamTruBanThan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiamTruNPT)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThangNam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CongLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GioCongNgay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HsNgayThuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HsNgayLe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PcAn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TLBHXH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TLBHYT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TLBHTN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TLKPCD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiamTruBanThan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiamTruNPT)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaThamSo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaThamSo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaThamSo })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,120 @@
+﻿@model AccountingSoftware.Models.ThamSoTinhLuong
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ThamSoTinhLuong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ThangNam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThangNam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CongLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CongLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioCongNgay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioCongNgay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HsNgayThuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HsNgayThuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HsNgayLe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HsNgayLe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PcAn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PcAn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TLBHXH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TLBHXH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TLBHYT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TLBHYT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TLBHTN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TLBHTN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TLKPCD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TLKPCD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiamTruBanThan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiamTruBanThan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiamTruNPT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiamTruNPT)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
