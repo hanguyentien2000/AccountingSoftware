@@ -12,6 +12,8 @@ namespace AccountingSoftware.Models
         [Key]
         public int MaThamSo { get; set; }
 
+        public int MaNV { get; set; }
+
         [Required]
         [StringLength(100)]
         public string ThangNam { get; set; }
@@ -32,9 +34,6 @@ namespace AccountingSoftware.Models
         [StringLength(100)]
         public string HsNgayLe { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string PcAn { get; set; }
         [Required]
         [StringLength(100)]
         public string TLBHXH { get; set; }
@@ -58,5 +57,7 @@ namespace AccountingSoftware.Models
         [Required]
         [StringLength(100)]
         public string GiamTruNPT { get; set; }
+
+        public virtual NhanVien NhanVien { get; set; }
     }
 }

@@ -25,5 +25,8 @@ namespace AccountingSoftware.Models
         [Required]
         [StringLength(100)]
         public string ThueSuat { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? NgayNopThue { get; set; }
     }
 }

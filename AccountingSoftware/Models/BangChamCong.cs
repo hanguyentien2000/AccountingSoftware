@@ -37,6 +37,9 @@ namespace AccountingSoftware.Models
         [StringLength(100)]
         public string DGHQCN { get; set; }
 
+        [Column(TypeName = "date")]
+        public DateTime? NgayChamCong { get; set; }
+
         public virtual NhanVien NhanVien { get; set; }
     }
 }

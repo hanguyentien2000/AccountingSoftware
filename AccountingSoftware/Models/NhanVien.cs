@@ -14,6 +14,7 @@ namespace AccountingSoftware.Models
         {
             BangChamCongs = new HashSet<BangChamCong>();
             TangGiamLuongs = new HashSet<TangGiamLuong>();
+            ThamSoTinhLuongs = new HashSet<ThamSoTinhLuong>();
         }
 
         [Key]
@@ -68,5 +69,8 @@ namespace AccountingSoftware.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TangGiamLuong> TangGiamLuongs { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThamSoTinhLuong> ThamSoTinhLuongs { get; set; }
     }
 }

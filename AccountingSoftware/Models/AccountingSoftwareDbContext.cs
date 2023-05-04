@@ -34,6 +34,11 @@ namespace AccountingSoftware.Models
                 .HasMany(e => e.TangGiamLuongs)
                 .WithRequired(e => e.NhanVien)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<NhanVien>()
+                .HasMany(e => e.ThamSoTinhLuongs)
+                .WithRequired(e => e.NhanVien)
+                .WillCascadeOnDelete(false);
         }
     }
 }
