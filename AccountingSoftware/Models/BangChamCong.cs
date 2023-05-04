@@ -32,6 +32,9 @@ namespace AccountingSoftware.Models
 
         [Required]
         [StringLength(100)]
+        public string SoNgayCongThucTe { get; set; }
+        [Required]
+        [StringLength(100)]
         public string DGHQCN { get; set; }
 
         public virtual NhanVien NhanVien { get; set; }

@@ -136,6 +136,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
+    <Compile Include="Areas\Administrator\Controllers\BangChamCongController.cs" />
     <Compile Include="Areas\Administrator\Controllers\BaseController.cs" />
     <Compile Include="Areas\Administrator\Controllers\AccountController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ChucVuController.cs" />
@@ -165,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Administrator\Assets\ChucVu.js" />
+    <Content Include="Areas\Administrator\Assets\BangChamCong.js" />
     <Content Include="Areas\Administrator\Assets\ThueTNCN.js" />
     <Content Include="Areas\Administrator\Assets\NhanVien.js" />
     <Content Include="Areas\Administrator\Assets\PhongBan.js" />
@@ -4612,6 +4614,11 @@
     <Content Include="Areas\Administrator\Views\ThueTNCN\Details.cshtml" />
     <Content Include="Areas\Administrator\Views\ThueTNCN\Edit.cshtml" />
     <Content Include="Areas\Administrator\Views\ThueTNCN\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\BangChamCong\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\BangChamCong\Delete.cshtml" />
+    <Content Include="Areas\Administrator\Views\BangChamCong\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\BangChamCong\Edit.cshtml" />
+    <Content Include="Areas\Administrator\Views\BangChamCong\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

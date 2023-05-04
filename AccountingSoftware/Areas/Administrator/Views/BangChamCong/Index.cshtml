@@ -1,0 +1,262 @@
+﻿@model PagedList.IPagedList<AccountingSoftware.Models.BangChamCong>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Bảng chấm công";
+}
+
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NhanVien.HoTen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoNgayLVNgayThuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoNgayLVNgayLe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoNgayLVNgayNghiPhep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoNgayNghiKhongLuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DGHQCN)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NhanVien.HoTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoNgayLVNgayThuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoNgayLVNgayLe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoNgayLVNgayNghiPhep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoNgayNghiKhongLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DGHQCN)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaCC }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaCC }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaCC })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Bảng chấm công</h3>
+        </div>
+    </div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-8">
+                    @*<span class="glyphicon glyphicon-plus"></span>@Html.ActionLink("Thêm mới", "Create")*@
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">
+                        Thêm mới
+                    </button>
+                </div>
+                <div class="col-sm-4">
+                    <div id="datatable_filter" class="dataTables_filter">
+                        <form>
+                            <button type="submit" hidden>My Button</button>
+                            <input type="text" class="form-control" name="searchString" value="@ViewBag.searchString" id="searchString" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon2" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Tên nhân viên
+                        </th>
+                        <th>
+                            Chức vụ
+                        </th>
+                        <th>
+                            Số ngày làm việc ngày thường
+                        </th>
+                        <th>
+                            Số ngày làm việc ngày lễ
+                        </th>
+                        <th>
+                            Số ngày công nghỉ phép
+                        </th>
+                        <th>
+                            Số ngày nghỉ không lương
+                        </th>
+                        <th>
+                            Số ngày công thực tế
+                        </th>
+                        <th>
+                            Đánh giá hiệu quả cá nhân
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.NhanVien.HoTen)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NhanVien.MaChucVu)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SoNgayLVNgayThuong)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SoNgayLVNgayLe)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SoNgayLVNgayNghiPhep)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SoNgayNghiKhongLuong)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SoNgayCongThucTe)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DGHQCN)</td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <br />
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page,
+            currentFilter = ViewBag.CurrentFilter
+            }))
+        </div>
+    </div>
+</div>
+
+@section Popup{
+    <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">THÊM MỚI CHẤM CÔNG</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="add-form" onsubmit="return themBangChamCong()">
+                        <div class="form-group">
+                            <label for="MaNhanVien">Mã nhân viên</label>
+                            <br />
+                            <select class="form-select" id="manv" name="MaNV"
+                                    aria-label="category select example" required style="height: 30px; width: 440px;">
+                                @foreach (var item in ViewBag.nhanViens)
+                                {
+                                    <option value="@item.MaNV">@item.HoTen</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="snlvnt">Số ngày làm việc ngày thường</label>
+                            <input type="text" class="form-control" id="snlvnt" name="SoNgayLVNgayThuong" placeholder="Nhập số ngày làm việc ngày thường">
+                        </div>
+                        <div class="form-group">
+                            <label for="snlvnl">Số ngày làm việc ngày lễ</label>
+                            <input type="text" class="form-control" id="snlvnl" name="SoNgayLVNgayLe" placeholder="Nhập số ngày làm việc ngày lễ">
+                        </div>
+                        <div class="form-group">
+                            <label for="snlvnp">Số ngày làm việc ngày nghỉ phép</label>
+                            <input type="text" class="form-control" id="snlvnp" name="SoNgayLVNgayNghiPhep" placeholder="Nhập số ngày làm việc ngày lễ">
+                        </div>
+                        <div class="form-group">
+                            <label for="snlvkl">Số ngày làm việc ngày nghỉ không lương</label>
+                            <input type="text" class="form-control" id="snlvkl" name="SoNgayNghiKhongLuong" placeholder="Nhập số ngày nghỉ không lương">
+                        </div>
+                        <div class="form-group">
+                            <label for="snlvkl">Số ngày công thực tế</label>
+                            <input type="text" class="form-control" id="snctt" name="SoNgayCongThucTe" placeholder="Nhập số ngày công thực tế">
+                        </div>
+                        <div class="form-group">
+                            <label for="dghqcn">Đánh giá hiệu quả cá nhân</label>
+                            <input type="text" class="form-control" id="dghqcn" name="DGHQCN" placeholder="Nhập số ngày nghỉ không lương">
+                        </div>
+                        <p id="add-message"></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="themBangChamCong()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section changePopup {
+    <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">CẬP NHẬT CHẤM CÔNG</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="update-form" onsubmit="return capNhatBangChamCong()">
+                        <input type="hidden" name="MaCC" id="id1" />
+                        <div class="form-group">
+                            <label for="MaNhanVien">Mã nhân viên</label>
+                            <br />
+                            <select class="form-select" id="idnv1" name="MaNV"
+                                    aria-label="category select example" required style="height: 30px; width: 440px;">
+                                @foreach (var item in ViewBag.nhanViens)
+                                {
+                                    <option value="@item.MaNV">@item.HoTen</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="snlvnt">Số ngày làm việc ngày thường</label>
+                            <input type="text" class="form-control" id="ngaythuong1" name="SoNgayLVNgayThuong" placeholder="Nhập số ngày làm việc ngày thường">
+                        </div>
+                        <div class="form-group">
+                            <label for="snlvnl">Số ngày làm việc ngày lễ</label>
+                            <input type="text" class="form-control" id="ngayle1" name="SoNgayLVNgayLe" placeholder="Nhập số ngày làm việc ngày lễ">
+                        </div>
+                        <div class="form-group">
+                            <label for="snlvnp">Số ngày làm việc ngày nghỉ phép</label>
+                            <input type="text" class="form-control" id="nghiphep1" name="SoNgayLVNgayNghiPhep" placeholder="Nhập số ngày làm việc ngày lễ">
+                        </div>
+                        <div class="form-group">
+                            <label for="snlvkl">Số ngày làm việc ngày nghỉ không lương</label>
+                            <input type="text" class="form-control" id="khongluong1" name="SoNgayNghiKhongLuong" placeholder="Nhập số ngày nghỉ không lương">
+                        </div>
+                        <div class="form-group">
+                            <label for="snlvkl">Số ngày công thực tế</label>
+                            <input type="text" class="form-control" id="thucte1" name="SoNgayCongThucTe" placeholder="Nhập số ngày công thực tế">
+                        </div>
+                        <div class="form-group">
+                            <label for="dghqcn">Đánh giá hiệu quả cá nhân</label>
+                            <input type="text" class="form-control" id="dghq1" name="DGHQCN" placeholder="Nhập số ngày nghỉ không lương">
+                        </div>
+                        <p id="update-message"></p>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="capNhatBangChamCong()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Areas/Administrator/Assets/BangChamCong.js"></script>

@@ -1,0 +1,72 @@
+﻿@model AccountingSoftware.Models.BangChamCong
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BangChamCong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NhanVien.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhanVien.HoTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoNgayLVNgayThuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoNgayLVNgayThuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoNgayLVNgayLe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoNgayLVNgayLe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoNgayLVNgayNghiPhep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoNgayLVNgayNghiPhep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoNgayNghiKhongLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoNgayNghiKhongLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DGHQCN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DGHQCN)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

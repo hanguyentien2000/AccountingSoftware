@@ -1,0 +1,66 @@
+﻿@model AccountingSoftware.Models.BangChamCong
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BangChamCong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NhanVien.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhanVien.HoTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoNgayLVNgayThuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoNgayLVNgayThuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoNgayLVNgayLe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoNgayLVNgayLe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoNgayLVNgayNghiPhep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoNgayLVNgayNghiPhep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoNgayNghiKhongLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoNgayNghiKhongLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DGHQCN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DGHQCN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaCC }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
