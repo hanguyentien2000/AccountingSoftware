@@ -1,93 +1,271 @@
-﻿@model IEnumerable<AccountingSoftware.Models.ThamSoTinhLuong>
-
+﻿@model PagedList.IPagedList<AccountingSoftware.Models.ThamSoTinhLuong>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Tham số tính lương</h3>
+        </div>
+    </div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-sm-8">
+                    @*<span class="glyphicon glyphicon-plus"></span>@Html.ActionLink("Thêm mới", "Create")*@
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCreate">
+                        Thêm mới
+                    </button>
+                </div>
+                <div class="col-sm-4">
+                    <div id="datatable_filter" class="dataTables_filter">
+                        <form>
+                            <button type="submit" hidden>My Button</button>
+                            <input type="text" class="form-control" name="searchString" value="@ViewBag.searchString" id="searchString" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon2" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Tháng năm
+                        </th>
+                        <th>
+                            Giờ công ngày
+                        </th>
+                        <th>
+                            Hệ số ngày thường
+                        </th>
+                        <th>
+                            Hệ số ngày lễ
+                        </th>
+                        <th>
+                            Thù lao BHXH
+                        </th>
+                        <th>
+                            Thù lao BHYT
+                        </th>
+                        <th>
+                            Thù lao BHTN
+                        </th>
+                        <th>
+                            Thù lao KPCD
+                        </th>
+                        <th>
+                            Giảm trừ bản thân
+                        </th>
+                        <th>
+                            Giảm trừ NPT
+                        </th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.ThangNam)</td>
+                            <td>@Html.DisplayFor(modelItem => item.GioCongNgay)</td>
+                            <td>@Html.DisplayFor(modelItem => item.HsNgayThuong)</td>
+                            <td>@Html.DisplayFor(modelItem => item.HsNgayLe)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TLBHXH)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TLBHYT)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TLBHTN)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TLKPCD)</td>
+                            <td>@Html.DisplayFor(modelItem => item.GiamTruBanThan)</td>
+                            <td>@Html.DisplayFor(modelItem => item.GiamTruNPT)</td>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ThangNam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CongLuong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GioCongNgay)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HsNgayThuong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HsNgayLe)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TLBHXH)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TLBHYT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TLBHTN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TLKPCD)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiamTruBanThan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiamTruNPT)
-        </th>
-        <th></th>
-    </tr>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="loadData('@item.MaThamSo')" data-target="#modalUpdate" style="background-color: forestgreen">
+                                    Cập nhật
+                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDelete" onclick="deleteItem('@item.MaThamSo')" style="background-color: red">
+                                    Xoá
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+            <br />
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page,
+            currentFilter = ViewBag.CurrentFilter
+            }))
+        </div>
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThangNam)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CongLuong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GioCongNgay)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HsNgayThuong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HsNgayLe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TLBHXH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TLBHYT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TLBHTN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TLKPCD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiamTruBanThan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiamTruNPT)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaThamSo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaThamSo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaThamSo })
-        </td>
-    </tr>
+
+@section Popup{
+    <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">THÊM MỚI THAM SỐ</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="add-form" onsubmit="return themThamSoTinhLuong()">
+                        <div class="form-group">
+                            <label for="GioCongNgay">Giờ công ngày</label>
+                            <input type="text" class="form-control" id="giocongngay" name="GioCongNgay" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="congluong">Công lương</label>
+                            <input type="text" class="form-control" id="congluong" name="CongLuong" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="ThangNam">Tháng/Năm</label>
+                            <input type="text" class="form-control" id="thangnam" name="ThangNam" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="hsnt">Hệ số ngày thường</label>
+                            <input type="text" class="form-control" id="hsnt" name="HsNgayThuong" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="hsnl">Hệ số ngày lễ</label>
+                            <input type="text" class="form-control" id="hsnl" name="HsNgayLe" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="tlbhxh">Thù lao BHXH</label>
+                            <input type="text" class="form-control" id="tlbhxh" name="TLBHXH" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="tlbhyt">Thù lao BHYT</label>
+                            <input type="text" class="form-control" id="tlbhyt" name="TLBHYT" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="tlbhtn">Thù lao BHTN</label>
+                            <input type="text" class="form-control" id="tlbhtn" name="TLBHTN" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="tlpkcd">Thù lao KPCD</label>
+                            <input type="text" class="form-control" id="tlpkcd" name="TLKPCD" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="gtbt">Giảm trừ bản thân</label>
+                            <input type="text" class="form-control" id="gtbt" name="GiamTruBanThan" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="gtnpt">Giảm trừ người phụ thuộc</label>
+                            <input type="text" class="form-control" id="gtnpt" name="GiamTruNPT" placeholder="">
+                        </div>
+                        <p id="add-message"></p>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="themThamSoTinhLuong()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
-</table>
+@section changePopup {
+    <div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 900px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">CẬP NHẬT THAM SỐ</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="update-form" onsubmit="return capNhatThamSoTinhLuong()">
+                        <input type="hidden" name="MaThamSo" id="id1" />
+                        <div class="form-group">
+                            <label for="GioCongNgay">Giờ công ngày</label>
+                            <input type="text" class="form-control" id="giocongngay1" name="GioCongNgay" placeholder="Nhập tháng năm">
+                        </div>
+                        <div class="form-group">
+                            <label for="ThangNam">Công lương</label>
+                            <input type="text" class="form-control" id="congluong1" name="CongLuong" placeholder="Nhập tháng năm">
+                        </div>
+                        <div class="form-group">
+                            <label for="ThangNam">Tháng/Năm</label>
+                            <input type="text" class="form-control" id="thangnam1" name="ThangNam" placeholder="Nhập tháng năm">
+                        </div>
+                        <div class="form-group">
+                            <label for="hsnt">Hệ số ngày thường</label>
+                            <input type="text" class="form-control" id="hsnt1" name="HsNgayThuong" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="hsnl">Hệ số ngày lễ</label>
+                            <input type="text" class="form-control" id="hsnl1" name="HsNgayLe" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="tlbhxh">Thù lao BHXH</label>
+                            <input type="text" class="form-control" id="tlbhxh1" name="TLBHXH" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="tlbhyt">Thù lao BHYT</label>
+                            <input type="text" class="form-control" id="tlbhyt1" name="TLBHYT" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="tlbhtn">Thù lao BHTN</label>
+                            <input type="text" class="form-control" id="tlbhtn1" name="TLBHTN" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="tlpkcd">Thù lao KPCD</label>
+                            <input type="text" class="form-control" id="tlkpcd1" name="TLKPCD" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="gtbt">Giảm trừ bản thân</label>
+                            <input type="text" class="form-control" id="gtbt1" name="GiamTruBanThan" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="gtnpt">Giảm trừ người phụ thuộc</label>
+                            <input type="text" class="form-control" id="gtnpt1" name="GiamTruNPT" placeholder="">
+                        </div>
+                        <p id="update-message"></p>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="capNhatThamSoTinhLuong()">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section deletePopup {
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 500px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px">XOÁ TÀI KHOẢN</h5>
+                </div>
+                <div class="modal-body">
+                    <h4 class="form-group mb-4 text-center fa-1x">
+                        Bạn đã chắc chắn chưa ?
+                    </h4>
+                    <div class="form-group mb-12" style="display: flex">
+                        <input type="hidden" value="" id="delete-id" />
+
+                        <div class="form-group mb-6" style="width:50%">
+                            <button type="button" class="btn btn-block btn-danger" onclick="xoaThamSoTinhLuong()">Xoá</button>
+                        </div>
+                        <div class="form-group mb-6" style="width:50%">
+                            <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Đóng</button>
+                        </div>
+                        <p id="delete-message"></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Areas/Administrator/Assets/ThamSoTinhLuong.js"></script>

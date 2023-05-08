@@ -33,6 +33,7 @@ namespace AccountingSoftware.Models
         [Required]
         [StringLength(100)]
         public string SoNgayCongThucTe { get; set; }
+
         [Required]
         [StringLength(100)]
         public string DGHQCN { get; set; }

@@ -169,6 +169,7 @@
   <ItemGroup>
     <Content Include="Areas\Administrator\Assets\ChucVu.js" />
     <Content Include="Areas\Administrator\Assets\BangChamCong.js" />
+    <Content Include="Areas\Administrator\Assets\ThamSoTinhLuong.js" />
     <Content Include="Areas\Administrator\Assets\ThueTNCN.js" />
     <Content Include="Areas\Administrator\Assets\NhanVien.js" />
     <Content Include="Areas\Administrator\Assets\PhongBan.js" />
@@ -4637,13 +4638,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -4651,6 +4645,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
