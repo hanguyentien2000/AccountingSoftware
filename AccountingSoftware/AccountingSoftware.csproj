@@ -137,6 +137,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
     <Compile Include="Areas\Administrator\Controllers\BangChamCongController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\BaoCaoBaoHiemXHController.cs" />
     <Compile Include="Areas\Administrator\Controllers\BaseController.cs" />
     <Compile Include="Areas\Administrator\Controllers\AccountController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ChucVuController.cs" />
@@ -144,7 +145,6 @@
     <Compile Include="Areas\Administrator\Controllers\NguoiDungController.cs" />
     <Compile Include="Areas\Administrator\Controllers\NhanVienController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PhongBanController.cs" />
-    <Compile Include="Areas\Administrator\Controllers\BaoCaoBHXH.cs" />
     <Compile Include="Areas\Administrator\Controllers\ThamSoTinhLuongController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ThueTNCNController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -153,6 +153,7 @@
     </Compile>
     <Compile Include="Models\AccountingSoftwareDbContext.cs" />
     <Compile Include="Models\BangChamCong.cs" />
+    <Compile Include="Models\BaoCaoBaoHiemXH.cs" />
     <Compile Include="Models\ChucVu.cs" />
     <Compile Include="Models\NguoiDung.cs" />
     <Compile Include="Models\NhanVien.cs" />
@@ -4627,6 +4628,7 @@
     <Content Include="Areas\Administrator\Views\ThamSoTinhLuong\Details.cshtml" />
     <Content Include="Areas\Administrator\Views\ThamSoTinhLuong\Edit.cshtml" />
     <Content Include="Areas\Administrator\Views\ThamSoTinhLuong\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\BaoCaoBaoHiemXH\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
