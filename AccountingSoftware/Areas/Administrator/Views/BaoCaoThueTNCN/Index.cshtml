@@ -1,0 +1,118 @@
+﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Báo cáo thuế TNCN";
+}
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>@ViewBag.Title</h3>
+        </div>
+    </div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="form-group">
+                <div class="col-6">
+                    @using (Html.BeginForm())
+                    {
+                        <p>
+                            Tháng: @*<input type="number" value="" name="Month" min="1" max="12" required />*@
+                            <select name="thang" class="form-select" aria-label="Default select example" style="height: 27px">
+                                <option selected>--Chọn Tháng--</option>
+                                <option type="number" value="1" name="Month">Tháng 1</option>
+                                <option type="number" value="2" name="Month">Tháng 2</option>
+                                <option type="number" value="3" name="Month">Tháng 3</option>
+                                <option type="number" value="4" name="Month">Tháng 4</option>
+                                <option type="number" value="5" name="Month">Tháng 5</option>
+                                <option type="number" value="6" name="Month">Tháng 6</option>
+                                <option type="number" value="7" name="Month">Tháng 7</option>
+                                <option type="number" value="8" name="Month">Tháng 8</option>
+                                <option type="number" value="9" name="Month">Tháng 9</option>
+                                <option type="number" value="10" name="Month">Tháng 10</option>
+                                <option type="number" value="11" name="Month">Tháng 11</option>
+                                <option type="number" value="12" name="Month">Tháng 12</option>
+                            </select>
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+
+                            Năm: @*<input type="number" value="" name="Year" required />*@
+                            <select name="nam" class="form-select" aria-label="Default select example" style="height: 27px">
+                                <option selected>--Chọn Năm--</option>
+                                <option type="number" value="2015" name="Year">2015</option>
+                                <option type="number" value="2016" name="Year">2016</option>
+                                <option type="number" value="2017" name="Year">2017</option>
+                                <option type="number" value="2018" name="Year">2018</option>
+                                <option type="number" value="2019" name="Year">2019</option>
+                                <option type="number" value="2020" name="Year">2020</option>
+                                <option type="number" value="2021" name="Year">2021</option>
+                                <option type="number" value="2022" name="Year">2022</option>
+                                <option type="number" value="2023" name="Year">2023</option>
+                                <option type="number" value="2024" name="Year">2024</option>
+                                <option type="number" value="2025" name="Year">2025</option>
+                                <option type="number" value="2026" name="Year">2026</option>
+
+                            </select>
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+                            <input type="submit" value="Xem" class="btn btn-primary" />
+                        </p>
+                    }
+                </div>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Nhân viên
+                        </th>
+                        <th>
+                            Mã số thuế
+                        </th>
+                        <th>
+                            Thu nhập chịu thuế
+                        </th>
+                        <th>
+                            Số người phụ thuộc
+                        </th>
+                        <th>
+                            Giảm trừ người nộp
+                        </th>
+                        <th>
+                            Giảm trừ người phụ thuộc
+                        </th>
+                        <th>
+                            Thu nhập tính thuế
+                        </th>
+                        <th>
+                            Thuế TNCN
+                        </th>
+                    </tr>
+                </thead>
+                @if (ViewBag.ListTNCN != null)
+                {
+                    foreach (var item in ViewBag.ListTNCN)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.HoTen</td>
+                                <td>
+                                    @item.MaSoThue
+                                </td>
+                                <td>@item.LuongThoaThuan</td>
+                                <td>@item.SoNPT</td>
+                                <td>@item.GiamTruNguoiNop</td>
+                                <td>@item.GiamTruNguoiPhuThuoc</td>
+                                <td>@item.ThuNhapTinhThue</td>
+                                <td>@item.ThueTNCN</td>
+                            </tr>
+                        </tbody>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>
