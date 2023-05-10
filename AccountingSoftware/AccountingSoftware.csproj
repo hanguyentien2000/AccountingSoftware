@@ -137,6 +137,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
     <Compile Include="Areas\Administrator\Controllers\BangChamCongController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\BaoCaoBangLuongTongHopController.cs" />
     <Compile Include="Areas\Administrator\Controllers\BaoCaoBangLuongController.cs" />
     <Compile Include="Areas\Administrator\Controllers\BaoCaoThueTNCN.cs" />
     <Compile Include="Areas\Administrator\Controllers\BaoCaoBaoHiemXHController.cs" />
@@ -4634,6 +4635,7 @@
     <Content Include="Areas\Administrator\Views\BaoCaoBaoHiemXH\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\BaoCaoThueTNCN\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\BaoCaoBangLuong\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\BaoCaoBangLuongTongHop\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
