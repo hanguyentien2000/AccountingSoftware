@@ -52,7 +52,6 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                             float total3 = total2 * c;
                             newModel.ThueTNCN = total3.ToString();
                         }
-                  
                     }
                     listModel.Add(newModel);
                 }

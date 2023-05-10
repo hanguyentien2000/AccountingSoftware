@@ -10,15 +10,15 @@ using AccountingSoftware.Models;
 
 namespace AccountingSoftware.Areas.Administrator.Controllers
 {
-    public class BaoCaoLuongController : Controller
+    public class BaoCaoBangLuongController : Controller
     {
         private AccountingSoftwareDbContext db = new AccountingSoftwareDbContext();
 
-        // GET: Administrator/BaoCaoBaoHiemXH
+        // GET: Administrator/BaoCaoLuong
         public ActionResult Index(string thang, string nam)
         {
             var listModel = new List<BaoCaoBangLuong>();
-
+            var listTNCN = db.ThueTNCNs.ToList();
             var parameters = thang + "/" + nam;
             var paramsThamSo = db.ThamSoTinhLuongs.Where(x => x.ThangNam == parameters).FirstOrDefault();
             if (paramsThamSo == null)
@@ -32,8 +32,8 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                 var listNhanVien = db.NhanViens.Include(s => s.BangChamCongs).ToList();
                 foreach (var item in listNhanVien)
                 {
-                    var soCong = db.BangChamCongs.Where(x => x.MaNV == item.MaNV).FirstOrDefault();
                     var newModel = new BaoCaoBangLuong();
+                    var soCong = db.BangChamCongs.Where(x => x.MaNV == item.MaNV).FirstOrDefault();
                     newModel.HoTen = item.HoTen;
                     newModel.LuongThoaThuan = item.LuongThoaThuan;
                     newModel.LuongCoBan = item.LuongCoBan;
@@ -45,12 +45,34 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                     newModel.BHTN = total2.ToString();
                     int total3 = int.Parse(item.LuongCoBan) * int.Parse(paramsThamSo.TLBHYT);
                     newModel.BHYT = total3.ToString();
-                    //int total4 = 
-                    //newModel.TongTien = total4.ToString();
+                    int total6 = int.Parse(item.LuongCoBan) * int.Parse(paramsThamSo.TLKPCD);
+                    newModel.KPCD = total6.ToString();
+                    int total7 = int.Parse(item.LuongThoaThuan) - int.Parse(paramsThamSo.GiamTruBanThan) - int.Parse(paramsThamSo.GiamTruNPT);
+                    newModel.ThuNhapTinhThue = total7.ToString();
+                    foreach (var item1 in listTNCN)
+                    {
+                        var a = int.Parse(item1.Tu);
+                        var b = int.Parse(item1.Den);
+                        if (total7 >= a && total7 <= b)
+                        {
+                            newModel.ThueSuat = item1.ThueSuat;
+                            float total4 = (int.Parse(item.LuongThoaThuan) - int.Parse(paramsThamSo.GiamTruBanThan)) * float.Parse(item1.ThueSuat);
+                            newModel.KhauTruThueTNCN = total4.ToString();
+                        }
+                    }
+                    newModel.DanhGiaHieuQua = soCong.DGHQCN;
+                    float total5 = ((int.Parse(item.LuongCoBan) / int.Parse(paramsThamSo.CongLuong)) * int.Parse(soCong.SoNgayCongThucTe) - (total1 + total2 + total3) - float.Parse(newModel.KhauTruThueTNCN)) * int.Parse(soCong.DGHQCN);
+                    newModel.ThucLinh = total5.ToString();
+                    var listChucVu = db.ChucVus.ToList();
+                    foreach (var item1 in listChucVu)
+                    {
+                        if (item.MaChucVu == item1.MaChucVu)
+                            newModel.ChucVu = item1.TenChucVu;
+                    }
                     listModel.Add(newModel);
                 }
-                ViewBag.ListBhxh = listModel;
-                return View(ViewBag.ListBhxh);
+                ViewBag.ListBCBL = listModel;
+                return View(ViewBag.ListBCBL);
             }
         }
 

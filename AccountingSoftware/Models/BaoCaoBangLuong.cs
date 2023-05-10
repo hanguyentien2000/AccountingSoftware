@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
+using System.Web;
 
 namespace AccountingSoftware.Models
 {
@@ -10,11 +9,13 @@ namespace AccountingSoftware.Models
     {
         public int MaNV { get; set; }
         public string HoTen { get; set; }
+        public string ChucVu { get; set; }
+        public string ThuNhapTinhThue { get; set; }
         public string LuongCoBan { get; set; }
         public string LuongThoaThuan { get; set; }
         public string CongLuong { get; set; }
         public string SoNgayCongThucTe { get; set; }
-
+        public string ThueSuat { get; set; }
         public string BHXH { get; set; }
         public string BHYT { get; set; }
         public string BHTN { get; set; }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
+using System.Web;
 
 namespace AccountingSoftware.Models
 {
@@ -15,7 +14,6 @@ namespace AccountingSoftware.Models
         public string SoNPT { get; set; }
         public string GiamTruNguoiNop { get; set; }
         public string GiamTruNguoiPhuThuoc { get; set; }
-
         public string ThuNhapTinhThue { get; set; }
         public string ThueTNCN { get; set; }
     }

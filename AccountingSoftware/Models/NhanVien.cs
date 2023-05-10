@@ -27,10 +27,7 @@ namespace AccountingSoftware.Models
         [StringLength(100)]
         public string HoTen { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString =
-         "{0:yyyy-MM-dd}",
-         ApplyFormatInEditMode = true)]
+        [Column(TypeName = "date")]
         public DateTime NgaySinh { get; set; }
 
         public bool? GioiTinh { get; set; }
@@ -55,10 +52,7 @@ namespace AccountingSoftware.Models
         [StringLength(100)]
         public string SoNguoiPhuThuoc { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString =
-         "{0:yyyy-MM-dd}",
-         ApplyFormatInEditMode = true)]
+        [Column(TypeName = "date")]
         public DateTime NgayVaoLam { get; set; }
 
         [Required]

@@ -17,7 +17,6 @@ namespace AccountingSoftware.Models
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<PhongBan> PhongBans { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TangGiamLuong> TangGiamLuongs { get; set; }
         public virtual DbSet<ThamSoTinhLuong> ThamSoTinhLuongs { get; set; }
         public virtual DbSet<ThueTNCN> ThueTNCNs { get; set; }
