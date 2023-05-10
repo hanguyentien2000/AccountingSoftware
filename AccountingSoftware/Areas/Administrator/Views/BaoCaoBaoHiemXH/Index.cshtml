@@ -1,7 +1,6 @@
-﻿@model AccountingSoftware.Models.BaoCaoBaoHiemXH
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Báo cáo bảo hiểm xã hội";
+    ViewBag.Title = "Báo cáo khoản trích theo lương";
 }
 
 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -18,7 +17,7 @@
                     {
                         <p>
                             Tháng: @*<input type="number" value="" name="Month" min="1" max="12" required />*@
-                            <select name="Month" class="form-select" aria-label="Default select example" style="height: 27px">
+                            <select name="thang" class="form-select" aria-label="Default select example" style="height: 27px">
                                 <option selected>--Chọn Tháng--</option>
                                 <option type="number" value="1" name="Month">Tháng 1</option>
                                 <option type="number" value="2" name="Month">Tháng 2</option>
@@ -39,7 +38,7 @@
                             &nbsp;
 
                             Năm: @*<input type="number" value="" name="Year" required />*@
-                            <select name="Year" class="form-select" aria-label="Default select example" style="height: 27px">
+                            <select name="nam" class="form-select" aria-label="Default select example" style="height: 27px">
                                 <option selected>--Chọn Năm--</option>
                                 <option type="number" value="2015" name="Year">2015</option>
                                 <option type="number" value="2016" name="Year">2016</option>
@@ -49,6 +48,11 @@
                                 <option type="number" value="2020" name="Year">2020</option>
                                 <option type="number" value="2021" name="Year">2021</option>
                                 <option type="number" value="2022" name="Year">2022</option>
+                                <option type="number" value="2023" name="Year">2023</option>
+                                <option type="number" value="2024" name="Year">2024</option>
+                                <option type="number" value="2025" name="Year">2025</option>
+                                <option type="number" value="2026" name="Year">2026</option>
+
                             </select>
                             &nbsp;
                             &nbsp;
@@ -89,24 +93,28 @@
                         <th>
                             Tổng tiền
                         </th>
-                        <th>Thao tác</th>
                     </tr>
                 </thead>
-                @foreach (var item in Model)
+                @if (ViewBag.ListBhxh != null)
                 {
-                    <tbody>
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
-                            <td>@Html.DisplayFor(modelItem => item.LuongCoBan)</td>
-                            <td>@Html.DisplayFor(modelItem => item.TLBHXH)</td>
-                            <td>@Html.DisplayFor(modelItem => item.TLBHYT)</td>
-                            <td>@Html.DisplayFor(modelItem => item.TLBHTN)</td>
-                            <td>@Html.DisplayFor(modelItem => item.MucChiTraTLBHXH)</td>
-                            <td>@Html.DisplayFor(modelItem => item.MucChiTraTLBHYT)</td>
-                            <td>@Html.DisplayFor(modelItem => item.MucChiTraTLBHTN)</td>
-                            <td>@Html.DisplayFor(modelItem => item.TongTien)</td>
-                        </tr>
-                    </tbody>
+                    foreach (var item in ViewBag.ListBhxh)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.HoTen</td>
+                                <td>
+                                   @String.Format("{0:0,0đ}", item.LuongCoBan)
+                                </td>
+                                <td>@item.TLBHXH</td>
+                                <td>@item.TLBHYT</td>
+                                <td>@item.TLBHTN</td>
+                                <td>@String.Format("{0:0,0đ}", item.MucChiTraTLBHXH)</td>
+                                <td>@String.Format("{0:0,0đ}", item.MucChiTraTLBHYT)</td>
+                                <td>@String.Format("{0:0,0đ}", item.MucChiTraTLBHTN)</td>
+                                <td>@String.Format("{0:0,0đ}", item.TongTien)</td>
+                            </tr>
+                        </tbody>
+                    }
                 }
             </table>
         </div>
