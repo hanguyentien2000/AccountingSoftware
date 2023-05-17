@@ -11,8 +11,8 @@
     </div>
     <div class="x_panel">
         <div class="x_content">
-            <div class="form-group">
-                <div class="col-6">
+            <div class="form-group col-md-12">
+                <div class="col-md-6">
                     @using (Html.BeginForm())
                     {
                         <p>
@@ -58,81 +58,100 @@
                             &nbsp;
                             &nbsp;
                             &nbsp;
-                            <input type="submit" value="Xem" class="btn btn-primary" />
+                            <input type="submit" value="Xuất" class="btn btn-primary" />
                         </p>
                     }
                 </div>
-            </div>
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>
-                            Nhân viên
-                        </th>
-                        <th>
-                            Chức vụ
-                        </th>
-                        <th>
-                            Lương thoả thuận
-                        </th>
-                        <th>
-                            Lương cơ bản
-                        </th>
-                        <th>
-                            Công lương
-                        </th>
-                        <th>
-                            Số ngày công thực tế
-                        </th>
-                        <th>
-                            BHXH
-                        </th>
-                        <th>
-                            BHYT
-                        </th>
-                        <th>
-                            BHTN
-                        </th>
-                        <th>
-                            KPCĐ
-                        </th>
-                        <th>
-                            Khấu trừ thuế TNCN
-                        </th>
-                        <th>
-                            Đánh giá hiệu quả
-                        </th>
-                        <th>
-                            Thực lĩnh
-                        </th>
-                    </tr>
-                </thead>
-                @if (ViewBag.ListBCBL != null)
-                {
-                    foreach (var item in ViewBag.ListBCBL)
+                @*<div class="col-md-6">
+                    @using (Html.BeginForm("Export", "BaoCaoBangLuong", FormMethod.Post))
                     {
-                        <tbody>
-                            <tr>
-                                <td>@item.HoTen</td>
-                                <td>
-                                    @item.ChucVu
-                                </td>
-                                <td>@item.LuongThoaThuan</td>
-                                <td>@item.LuongCoBan</td>
-                                <td>@item.CongLuong</td>
-                                <td>@item.SoNgayCongThucTe</td>
-                                <td>@item.BHXH</td>
-                                <td>@item.BHYT</td>
-                                <td>@item.BHTN</td>
-                                <td>@item.KPCD</td>
-                                <td>@item.KhauTruThueTNCN</td>
-                                <td>@item.DanhGiaHieuQua</td>
-                                <td>@item.ThucLinh</td>
-                            </tr>
-                        </tbody>
+                        <input type="hidden" name="GridHtml" />
+                        <input type="submit" id="btnSubmit" value="Xuất" class="btn btn-primary" />
                     }
-                }
-            </table>
+                </div>*@
+            </div>
+            <div id="Grid">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nhân viên
+                            </th>
+                            <th>
+                                Chức vụ
+                            </th>
+                            <th>
+                                Lương thoả thuận
+                            </th>
+                            <th>
+                                Lương cơ bản
+                            </th>
+                            <th>
+                                Công lương
+                            </th>
+                            <th>
+                                Số ngày công thực tế
+                            </th>
+                            <th>
+                                BHXH
+                            </th>
+                            <th>
+                                BHYT
+                            </th>
+                            <th>
+                                BHTN
+                            </th>
+                            <th>
+                                KPCĐ
+                            </th>
+                            <th>
+                                Khấu trừ thuế TNCN
+                            </th>
+                            <th>
+                                Đánh giá hiệu quả
+                            </th>
+                            <th>
+                                Thực lĩnh
+                            </th>
+                        </tr>
+                    </thead>
+                    @if (ViewBag.ListBCBL != null)
+                    {
+                        foreach (var item in ViewBag.ListBCBL)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@item.HoTen</td>
+                                    <td>
+                                        @item.ChucVu
+                                    </td>
+                                    <td>@item.LuongThoaThuan</td>
+                                    <td>@item.LuongCoBan</td>
+                                    <td>@item.CongLuong</td>
+                                    <td>@item.SoNgayCongThucTe</td>
+                                    <td>@item.BHXH</td>
+                                    <td>@item.BHYT</td>
+                                    <td>@item.BHTN</td>
+                                    <td>@item.KPCD</td>
+                                    <td>@item.KhauTruThueTNCN</td>
+                                    <td>@item.DanhGiaHieuQua</td>
+                                    <td>@item.ThucLinh</td>
+                                </tr>
+                            </tbody>
+                        }
+                    }
+                </table>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#Grid").html());
+        });
+    });
+</script>
+
+

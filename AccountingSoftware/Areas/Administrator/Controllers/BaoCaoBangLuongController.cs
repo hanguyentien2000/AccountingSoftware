@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AccountingSoftware.Models;
+using Microsoft.Reporting.WebForms;
 
 namespace AccountingSoftware.Areas.Administrator.Controllers
 {
@@ -72,10 +73,45 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                     listModel.Add(newModel);
                 }
                 ViewBag.ListBCBL = listModel;
-                return View(ViewBag.ListBCBL);
+
+                LocalReport localReport = new LocalReport();
+                localReport.ReportPath = Server.MapPath("~/Areas/Administrator/Reports/BaoCaoBangLuong.rdlc");
+                ReportDataSource reportDataSource = new ReportDataSource();
+                reportDataSource.Name = "BaoCaoBangLuong";
+                reportDataSource.Value = ViewBag.ListBCBL;
+                localReport.DataSources.Add(reportDataSource);
+                string reportType = "Word";
+                string mimeType;
+                string encoding;
+                string filenameExtension;
+                filenameExtension = "docx";
+
+                string[] streams;
+                Microsoft.Reporting.WebForms.Warning[] warnings;
+                byte[] renderedByte;
+                renderedByte = localReport.Render(reportType, "", out mimeType, out encoding, out filenameExtension,
+                    out streams, out warnings);
+                Response.AddHeader("content-disposition", "attachment;filename= baoCaoBangLuong_report." + filenameExtension);
+                return File(renderedByte, filenameExtension);
             }
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public EmptyResult Export(string GridHtml)
+        {
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment;filename=Grid.doc");
+            Response.Charset = "";
+            Response.ContentType = "application/vnd.ms-word";
+            Response.Output.Write(GridHtml);
+            Response.Flush();
+            Response.End();
+            return new EmptyResult();
+        }
+
+   
         protected override void Dispose(bool disposing)
         {
             if (disposing)
