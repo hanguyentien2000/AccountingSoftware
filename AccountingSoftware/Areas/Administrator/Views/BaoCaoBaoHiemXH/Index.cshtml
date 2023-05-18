@@ -103,7 +103,7 @@
                             <tr>
                                 <td>@item.HoTen</td>
                                 <td>
-                                   @String.Format("{0:0,0đ}", item.LuongCoBan)
+                                    @String.Format("{0:0,0đ}", item.LuongCoBan)
                                 </td>
                                 <td>@item.TLBHXH</td>
                                 <td>@item.TLBHYT</td>
@@ -120,3 +120,10 @@
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#Grid").html());
+        });
+    });
+</script>

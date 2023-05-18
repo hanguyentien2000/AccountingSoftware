@@ -22,8 +22,8 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         {
             var bangChamCongs = db.BangChamCongs.Select(bcc => bcc);
             ViewBag.nhanViens = db.NhanViens.Select(d => d);
-            ViewBag.chucvus = db.ChucVus.Select(d => d);
-           
+            var chucVus = db.ChucVus.ToList();
+            
             if (!String.IsNullOrEmpty(searchString))
             {
                 bangChamCongs = bangChamCongs.Where(dm => dm.NhanVien.HoTen.Contains(searchString));

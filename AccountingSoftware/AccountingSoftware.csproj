@@ -168,6 +168,7 @@
     <Compile Include="Areas\Administrator\Controllers\AccountController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ChucVuController.cs" />
     <Compile Include="Areas\Administrator\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\TangGiamLuongController.cs" />
     <Compile Include="Areas\Administrator\Controllers\NguoiDungController.cs" />
     <Compile Include="Areas\Administrator\Controllers\NhanVienController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PhongBanController.cs" />
@@ -198,6 +199,7 @@
     <Content Include="Areas\Administrator\Assets\ChucVu.js" />
     <Content Include="Areas\Administrator\Assets\BangChamCong.js" />
     <Content Include="Areas\Administrator\Assets\ThamSoTinhLuong.js" />
+    <Content Include="Areas\Administrator\Assets\TangGiamLuong.js" />
     <Content Include="Areas\Administrator\Assets\ThueTNCN.js" />
     <Content Include="Areas\Administrator\Assets\NhanVien.js" />
     <Content Include="Areas\Administrator\Assets\PhongBan.js" />
@@ -4670,6 +4672,7 @@
     <Content Include="AccountingSoftwareDataSet.xss">
       <DependentUpon>AccountingSoftwareDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\Administrator\Views\TangGiamLuong\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -78,6 +78,21 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public EmptyResult Export(string GridHtml)
+        {
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment;filename=BaoCaoTongHop.doc");
+            Response.Charset = "";
+            Response.ContentType = "application/vnd.ms-word";
+            Response.Output.Write(GridHtml);
+            Response.Flush();
+            Response.End();
+            return new EmptyResult();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

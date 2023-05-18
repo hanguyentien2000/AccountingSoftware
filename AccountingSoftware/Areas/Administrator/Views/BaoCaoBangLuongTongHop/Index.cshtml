@@ -1,6 +1,6 @@
 ﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Báo cáo bảng lương tổng hợp" ;
+    ViewBag.Title = "Báo cáo bảng lương tổng hợp";
 }
 
 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -152,3 +152,10 @@
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#Grid").html());
+        });
+    });
+</script>

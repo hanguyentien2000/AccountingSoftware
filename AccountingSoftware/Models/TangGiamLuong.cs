@@ -33,7 +33,5 @@ namespace AccountingSoftware.Models
         [Required]
         [StringLength(100)]
         public string ThongTin { get; set; }
-
-        public virtual NhanVien NhanVien { get; set; }
     }
 }
