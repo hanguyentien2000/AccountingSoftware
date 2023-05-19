@@ -15,7 +15,7 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         private AccountingSoftwareDbContext db = new AccountingSoftwareDbContext();
 
         // GET: Administrator/BaoCaoLuong
-        public ActionResult Index(float? manv, string thang, string nam)
+        public ActionResult Index(int? manv, string thang, string nam)
         {
             var NhanViens = db.NhanViens.ToList();
             ViewBag.nhanviens = NhanViens;
@@ -41,30 +41,40 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                     newModel.LuongCoBan = item.LuongCoBan;
                     newModel.CongLuong = paramsThamSo.CongLuong;
                     newModel.SoNgayCongThucTe = soCong.SoNgayCongThucTe;
-                    float total1 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLBHXH);
+                    double total1 = double.Parse(item.LuongCoBan) * double.Parse(paramsThamSo.TLBHXH);
                     newModel.BHXH = total1.ToString();
-                    float total2 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLBHTN);
+                    double total2 = double.Parse(item.LuongCoBan) * double.Parse(paramsThamSo.TLBHTN);
                     newModel.BHTN = total2.ToString();
-                    float total3 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLBHYT);
+                    double total3 = double.Parse(item.LuongCoBan) * double.Parse(paramsThamSo.TLBHYT);
                     newModel.BHYT = total3.ToString();
-                    float total6 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLKPCD);
+                    double total6 = double.Parse(item.LuongCoBan) * double.Parse(paramsThamSo.TLKPCD);
                     newModel.KPCD = total6.ToString();
-                    float total7 = float.Parse(item.LuongThoaThuan) - float.Parse(paramsThamSo.GiamTruBanThan) - float.Parse(paramsThamSo.GiamTruNPT);
+                    double total7 = double.Parse(item.LuongThoaThuan) - double.Parse(paramsThamSo.GiamTruBanThan) - double.Parse(paramsThamSo.GiamTruNPT);
                     newModel.ThuNhapTinhThue = total7.ToString();
                     foreach (var item1 in listTNCN)
                     {
-                        var a = float.Parse(item1.Tu);
-                        var b = float.Parse(item1.Den);
+                        var a = double.Parse(item1.Tu);
+                        var b = double.Parse(item1.Den);
                         if (total7 >= a && total7 <= b)
                         {
                             newModel.ThueSuat = item1.ThueSuat;
-                            float total4 = (float.Parse(item.LuongThoaThuan) - float.Parse(paramsThamSo.GiamTruBanThan)) * float.Parse(item1.ThueSuat);
+                            double total4 = (double.Parse(item.LuongThoaThuan) - double.Parse(paramsThamSo.GiamTruBanThan) - double.Parse(paramsThamSo.GiamTruNPT)) * double.Parse(item1.ThueSuat);
                             newModel.KhauTruThueTNCN = total4.ToString();
                         }
                     }
                     newModel.DanhGiaHieuQua = soCong.DGHQCN;
-                    float total5 = ((float.Parse(item.LuongCoBan) / float.Parse(paramsThamSo.CongLuong)) * float.Parse(soCong.SoNgayCongThucTe) - (total1 + total2 + total3) - float.Parse(newModel.KhauTruThueTNCN)) * float.Parse(soCong.DGHQCN);
-                    newModel.ThucLinh = total5.ToString();
+                    if (newModel.KhauTruThueTNCN != null)
+                    {
+                        double total5 = ((double.Parse(item.LuongThoaThuan) / double.Parse(paramsThamSo.CongLuong)) * double.Parse(soCong.SoNgayCongThucTe) - (total1 + total2 + total3) - double.Parse(newModel.KhauTruThueTNCN)) * double.Parse(soCong.DGHQCN);
+                        newModel.ThucLinh = total5.ToString();
+                    }
+                    else if (newModel.KhauTruThueTNCN == null)
+                    {
+                        newModel.KhauTruThueTNCN = "0";
+                        double total5 = ((double.Parse(item.LuongThoaThuan) / double.Parse(paramsThamSo.CongLuong)) * double.Parse(soCong.SoNgayCongThucTe) - (total1 + total2 + total3) - 0) * double.Parse(soCong.DGHQCN);
+                        newModel.ThucLinh = total5.ToString();
+                    }
+
                     var listChucVu = db.ChucVus.ToList();
                     foreach (var item1 in listChucVu)
                     {

@@ -33,7 +33,7 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         [HttpPost]
         public JsonResult Index(int id)
         {
-            NhanVien nv = db.NhanViens.Where(a => a.MaNV.Equals(id)).FirstOrDefault();
+            NhanVien nv = db.NhanViens.Where(a => a.MaNV.Equals(id)).Include(x => x.BangChamCongs).Include(x => x.TangGiamLuongs).FirstOrDefault();
             return Json(nv, JsonRequestBehavior.AllowGet);
         }
 

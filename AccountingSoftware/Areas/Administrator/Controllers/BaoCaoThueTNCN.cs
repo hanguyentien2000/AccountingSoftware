@@ -37,22 +37,28 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                     newModel.MaSoThue = item.MaSoThue;
                     newModel.LuongThoaThuan = item.LuongThoaThuan;
                     newModel.SoNPT = item.SoNguoiPhuThuoc;
-                    newModel.GiamTruNguoiNop = paramsThamSo.TLBHTN;
-                    int total1 = int.Parse(item.SoNguoiPhuThuoc) * int.Parse(paramsThamSo.GiamTruNPT);
+                    newModel.GiamTruNguoiNop = paramsThamSo.GiamTruBanThan;
+                    double total1 = double.Parse(item.SoNguoiPhuThuoc) * double.Parse(paramsThamSo.GiamTruNPT);
                     newModel.GiamTruNguoiPhuThuoc = total1.ToString();
-                    int total2 = int.Parse(item.LuongThoaThuan) - int.Parse(paramsThamSo.GiamTruBanThan) - int.Parse(paramsThamSo.GiamTruNPT);
+                    double total2 = double.Parse(item.LuongThoaThuan) - double.Parse(paramsThamSo.GiamTruBanThan) - double.Parse(paramsThamSo.GiamTruNPT);
                     newModel.ThuNhapTinhThue = total2.ToString();
-                    foreach (var item1 in listTNCN)
+                    if (total2 < 0)
+                        newModel.ThueTNCN = "0";
+                    else if (total2 >= 0)
                     {
-                        var a = int.Parse(item1.Tu);
-                        var b = int.Parse(item1.Den);
-                        if (total2 >= a && total2 <= b)
+                        foreach (var item1 in listTNCN)
                         {
-                            var c = float.Parse(item1.ThueSuat);
-                            float total3 = total2 * c;
-                            newModel.ThueTNCN = total3.ToString();
+                            var a = double.Parse(item1.Tu);
+                            var b = double.Parse(item1.Den);
+                            if (total2 >= a && total2 <= b)
+                            {
+                                var c = double.Parse(item1.ThueSuat);
+                                double total3 = total2 * c;
+                                newModel.ThueTNCN = total3.ToString();
+                            }
                         }
                     }
+                    
                     listModel.Add(newModel);
                 }
                 ViewBag.ListTNCN = listModel;
