@@ -11,8 +11,8 @@
     </div>
     <div class="x_panel">
         <div class="x_content">
-            <div class="form-group">
-                <div class="col-6">
+            <div class="form-group col-md-12">
+                <div class="col-md-6">
                     @using (Html.BeginForm())
                     {
                         <p>
@@ -62,63 +62,71 @@
                         </p>
                     }
                 </div>
-            </div>
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>
-                            Nhân viên
-                        </th>
-                        <th>
-                            Lương tính bảo hiểm
-                        </th>
-                        <th>
-                            BHXH
-                        </th>
-                        <th>
-                            BHYT
-                        </th>
-                        <th>
-                            BHTN
-                        </th>
-                        <th>
-                            Mức chi trả BHXH
-                        </th>
-                        <th>
-                            Mức chi trả BHYT
-                        </th>
-                        <th>
-                            Mức chi trả BHTN
-                        </th>
-                        <th>
-                            Tổng tiền
-                        </th>
-                    </tr>
-                </thead>
-                @if (ViewBag.ListBhxh != null)
-                {
-                    foreach (var item in ViewBag.ListBhxh)
+                <div class="col-md-6">
+                    @using (Html.BeginForm("Export", "BaoCaoBaoHiemXH", FormMethod.Post))
                     {
-                        <tbody>
-                            <tr>
-                                <td>@item.HoTen</td>
-                                <td>
-                                    @String.Format("{0:0,0đ}", item.LuongCoBan)
-                                </td>
-                                <td>@item.TLBHXH</td>
-                                <td>@item.TLBHYT</td>
-                                <td>@item.TLBHTN</td>
-                                <td>@String.Format("{0:0,0đ}", item.MucChiTraTLBHXH)</td>
-                                <td>@String.Format("{0:0,0đ}", item.MucChiTraTLBHYT)</td>
-                                <td>@String.Format("{0:0,0đ}", item.MucChiTraTLBHTN)</td>
-                                <td>@String.Format("{0:0,0đ}", item.TongTien)</td>
-                            </tr>
-                        </tbody>
+                        <input type="hidden" name="GridHtml" />
+                        <input type="submit" id="btnSubmit" value="Xuất" class="btn btn-primary" />
                     }
-                }
-            </table>
+                </div>
+            </div>
+            <div id="Grid">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Nhân viên
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Lương tính bảo hiểm
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                BHXH
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                BHYT
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                BHTN
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Mức chi trả BHXH
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Mức chi trả BHYT
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Mức chi trả BHTN
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Tổng tiền
+                            </th>
+                        </tr>
+                    </thead>
+                    @if (ViewBag.ListBhxh != null)
+                    {
+                        foreach (var item in ViewBag.ListBhxh)
+                        {
+                            <tbody style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                <tr style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.HoTen</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                        @String.Format("{0:0,0đ}", item.LuongCoBan)
+                                    </td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.TLBHXH</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.TLBHYT</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.TLBHTN</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@String.Format("{0:0,0đ}", item.MucChiTraTLBHXH)</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@String.Format("{0:0,0đ}", item.MucChiTraTLBHYT)</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@String.Format("{0:0,0đ}", item.MucChiTraTLBHTN)</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@String.Format("{0:0,0đ}", item.TongTien)</td>
+                                </tr>
+                            </tbody>
+                        }
+                    }
+                </table>
+            </div>
         </div>
-    </div>
 </div>
 <script>
     $(function () {

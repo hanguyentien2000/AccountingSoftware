@@ -38,13 +38,13 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                     newModel.TLBHXH = paramsThamSo.TLBHXH;
                     newModel.TLBHTN = paramsThamSo.TLBHTN;
                     newModel.TLBHYT = paramsThamSo.TLBHYT;
-                    int total1 = int.Parse(item.LuongCoBan) * int.Parse(paramsThamSo.TLBHXH);
+                    float total1 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLBHXH);
                     newModel.MucChiTraTLBHXH = total1.ToString();
-                    int total2 = int.Parse(item.LuongCoBan) * int.Parse(paramsThamSo.TLBHTN);
+                    float total2 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLBHTN);
                     newModel.MucChiTraTLBHTN = total2.ToString();
-                    int total3 = int.Parse(item.LuongCoBan) * int.Parse(paramsThamSo.TLBHYT);
+                    float total3 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLBHYT);
                     newModel.MucChiTraTLBHYT = total3.ToString();
-                    int total4 = total1 + total2 + total3;
+                    float total4 = total1 + total2 + total3;
                     newModel.TongTien = total4.ToString();
                     listModel.Add(newModel);
                 }

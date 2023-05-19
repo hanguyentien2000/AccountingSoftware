@@ -15,7 +15,7 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         private AccountingSoftwareDbContext db = new AccountingSoftwareDbContext();
 
         // GET: Administrator/BaoCaoLuong
-        public ActionResult Index(int? manv, string thang, string nam)
+        public ActionResult Index(float? manv, string thang, string nam)
         {
             var NhanViens = db.NhanViens.ToList();
             ViewBag.nhanviens = NhanViens;
@@ -41,29 +41,29 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
                     newModel.LuongCoBan = item.LuongCoBan;
                     newModel.CongLuong = paramsThamSo.CongLuong;
                     newModel.SoNgayCongThucTe = soCong.SoNgayCongThucTe;
-                    int total1 = int.Parse(item.LuongCoBan) * int.Parse(paramsThamSo.TLBHXH);
+                    float total1 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLBHXH);
                     newModel.BHXH = total1.ToString();
-                    int total2 = int.Parse(item.LuongCoBan) * int.Parse(paramsThamSo.TLBHTN);
+                    float total2 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLBHTN);
                     newModel.BHTN = total2.ToString();
-                    int total3 = int.Parse(item.LuongCoBan) * int.Parse(paramsThamSo.TLBHYT);
+                    float total3 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLBHYT);
                     newModel.BHYT = total3.ToString();
-                    int total6 = int.Parse(item.LuongCoBan) * int.Parse(paramsThamSo.TLKPCD);
+                    float total6 = float.Parse(item.LuongCoBan) * float.Parse(paramsThamSo.TLKPCD);
                     newModel.KPCD = total6.ToString();
-                    int total7 = int.Parse(item.LuongThoaThuan) - int.Parse(paramsThamSo.GiamTruBanThan) - int.Parse(paramsThamSo.GiamTruNPT);
+                    float total7 = float.Parse(item.LuongThoaThuan) - float.Parse(paramsThamSo.GiamTruBanThan) - float.Parse(paramsThamSo.GiamTruNPT);
                     newModel.ThuNhapTinhThue = total7.ToString();
                     foreach (var item1 in listTNCN)
                     {
-                        var a = int.Parse(item1.Tu);
-                        var b = int.Parse(item1.Den);
+                        var a = float.Parse(item1.Tu);
+                        var b = float.Parse(item1.Den);
                         if (total7 >= a && total7 <= b)
                         {
                             newModel.ThueSuat = item1.ThueSuat;
-                            float total4 = (int.Parse(item.LuongThoaThuan) - int.Parse(paramsThamSo.GiamTruBanThan)) * float.Parse(item1.ThueSuat);
+                            float total4 = (float.Parse(item.LuongThoaThuan) - float.Parse(paramsThamSo.GiamTruBanThan)) * float.Parse(item1.ThueSuat);
                             newModel.KhauTruThueTNCN = total4.ToString();
                         }
                     }
                     newModel.DanhGiaHieuQua = soCong.DGHQCN;
-                    float total5 = ((int.Parse(item.LuongCoBan) / int.Parse(paramsThamSo.CongLuong)) * int.Parse(soCong.SoNgayCongThucTe) - (total1 + total2 + total3) - float.Parse(newModel.KhauTruThueTNCN)) * int.Parse(soCong.DGHQCN);
+                    float total5 = ((float.Parse(item.LuongCoBan) / float.Parse(paramsThamSo.CongLuong)) * float.Parse(soCong.SoNgayCongThucTe) - (total1 + total2 + total3) - float.Parse(newModel.KhauTruThueTNCN)) * float.Parse(soCong.DGHQCN);
                     newModel.ThucLinh = total5.ToString();
                     var listChucVu = db.ChucVus.ToList();
                     foreach (var item1 in listChucVu)
@@ -84,7 +84,7 @@ namespace AccountingSoftware.Areas.Administrator.Controllers
         {
             Response.Clear();
             Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=BaoCaoTongHop.doc");
+            Response.AddHeader("content-disposition", "attachment;filename=BaoCaoBangLuongTongHop.doc");
             Response.Charset = "";
             Response.ContentType = "application/vnd.ms-word";
             Response.Output.Write(GridHtml);

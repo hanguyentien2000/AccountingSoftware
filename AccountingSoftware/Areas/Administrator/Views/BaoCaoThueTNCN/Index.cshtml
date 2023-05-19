@@ -11,8 +11,8 @@
     </div>
     <div class="x_panel">
         <div class="x_content">
-            <div class="form-group">
-                <div class="col-6">
+            <div class="form-group col-md-12">
+                <div class="col-md-6">
                     @using (Html.BeginForm())
                     {
                         <p>
@@ -62,59 +62,67 @@
                         </p>
                     }
                 </div>
-            </div>
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                        <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                            Nhân viên
-                        </th>
-                        <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                            Mã số thuế
-                        </th>
-                        <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                            Thu nhập chịu thuế
-                        </th>
-                        <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                            Số người phụ thuộc
-                        </th>
-                        <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                            Giảm trừ người nộp
-                        </th>
-                        <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                            Giảm trừ người phụ thuộc
-                        </th>
-                        <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                            Thu nhập tính thuế
-                        </th>
-                        <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                            Thuế TNCN
-                        </th>
-                    </tr>
-                </thead>
-                @if (ViewBag.ListTNCN != null)
-                {
-                    foreach (var item in ViewBag.ListTNCN)
+                <div class="col-md-6">
+                    @using (Html.BeginForm("Export", "BaoCaoThueTNCN", FormMethod.Post))
                     {
-                        <tbody style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                            <tr style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                                <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.HoTen</td>
-                                <td style="border: 1px  solid" cellspacing="0" cellpadding="0">
-                                    @item.MaSoThue
-                                </td>
-                                <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.LuongThoaThuan</td>
-                                <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.SoNPT</td>
-                                <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.GiamTruNguoiNop</td>
-                                <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.GiamTruNguoiPhuThuoc</td>
-                                <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.ThuNhapTinhThue</td>
-                                <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.ThueTNCN</td>
-                            </tr>
-                        </tbody>
+                        <input type="hidden" name="GridHtml" />
+                        <input type="submit" id="btnSubmit" value="Xuất" class="btn btn-primary" />
                     }
-                }
-            </table>
+                </div>
+            </div>
+            <div id="Grid">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Nhân viên
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Mã số thuế
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Thu nhập chịu thuế
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Số người phụ thuộc
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Giảm trừ người nộp
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Giảm trừ người phụ thuộc
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Thu nhập tính thuế
+                            </th>
+                            <th style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                Thuế TNCN
+                            </th>
+                        </tr>
+                    </thead>
+                    @if (ViewBag.ListTNCN != null)
+                    {
+                        foreach (var item in ViewBag.ListTNCN)
+                        {
+                            <tbody style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                <tr style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.HoTen</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">
+                                        @item.MaSoThue
+                                    </td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.LuongThoaThuan</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.SoNPT</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.GiamTruNguoiNop</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.GiamTruNguoiPhuThuoc</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.ThuNhapTinhThue</td>
+                                    <td style="border: 1px  solid" cellspacing="0" cellpadding="0">@item.ThueTNCN</td>
+                                </tr>
+                            </tbody>
+                        }
+                    }
+                </table>
+            </div>
         </div>
-    </div>
 </div>
 <script>
     $(function () {
